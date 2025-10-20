@@ -1,0 +1,19 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/content-wrap",
+	"title": "Content Wrap",
+	"description": "Content wrap block",
+	"style": ["file:./content-wrap.css"],
+	"category": "global",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "content-wrap"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "content-wrap.php"
+	},
+	"supports": {
+		"anchor": false,
+		"mode": false,
+		"jsx": true
+	}
+}

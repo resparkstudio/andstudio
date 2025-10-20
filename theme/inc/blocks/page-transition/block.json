@@ -1,0 +1,25 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/page-transition",
+	"title": "Page Transition",
+	"description": "page-transition block",
+	"style": ["file:./page-transition.css"],
+	"category": "global",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "page-transition"],
+	"acf": {
+		"renderTemplate": "page-transition.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": false
+	},
+ "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "preview_image": "preview.jpg"
+            }
+        }
+}
+}

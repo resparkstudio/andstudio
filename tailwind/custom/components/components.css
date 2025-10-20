@@ -1,0 +1,28 @@
+/**
+ * Custom styles to immediately follow Tailwind’s `components` layer
+ *
+ * “Add more opinionated, complex classes like buttons, form controls, alerts,
+ * etc; the sort of pre-built components you often see in other frameworks that
+ * you might need to override with utility classes.”
+ *
+ * — from https://tailwindcss.com/docs/plugins#adding-components
+ */
+
+@import "swiper/css";
+
+/* Buttons */
+.btn-primary {
+	@apply bg-neutral-black text-neutral-white text-body-s rounded-lg px-8 py-3 text-center;
+}
+
+.input {
+	@apply text-body-xs text-neutral-black hover:bg-neutral-grey-1 focus:text-neutral-black border-neutral-grey-3 rounded-lg border bg-white px-4 py-3 transition-colors duration-200 hover:text-[#797979] focus:outline-none;
+}
+
+.swiper-button-disabled {
+	@apply pointer-events-none opacity-40;
+}
+
+[data-swiper="navigation"].swiper-initialized .swiper-wrapper {
+	@apply gap-0;
+}

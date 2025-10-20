@@ -1,0 +1,18 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/strategy-1",
+	"title": "strategy-1",
+	"description": "strategy-1 block",
+	"style": ["file:./strategy-1.css"],
+	"category": "strategy",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "strategy-1"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "strategy-1.php"
+	},
+	"supports": {
+		"anchor": false,
+		"mode": false
+	}
+}

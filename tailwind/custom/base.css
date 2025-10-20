@@ -1,0 +1,23 @@
+/**
+ * Custom styles to immediately follow Tailwind’s `base` layer
+ */
+
+/**
+ * file and is applied both to the front end and in the block editor.
+ */
+
+/* tailwind/custom/base.css */
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	@apply font-primary text-neutral-black;
+}
+
+button {
+	@apply cursor-pointer;
+}
+
+/* Adjust when admin bar is present */
+.admin-bar header {
+	@apply top-11.5 md:top-8;
+}

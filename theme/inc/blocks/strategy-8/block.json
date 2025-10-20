@@ -1,0 +1,25 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/strategy-8",
+	"title": "strategy-8",
+	"description": "strategy-8 block",
+	"style": ["file:./strategy-8.css"],
+	"category": "strategy",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "strategy-8"],
+	"acf": {
+		"renderTemplate": "strategy-8.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": false
+	},
+ "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "preview_image": "preview.jpg"
+            }
+        }
+}
+}

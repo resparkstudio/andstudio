@@ -1,0 +1,61 @@
+/**
+ * Add your design tokens as Tailwind theme variables.
+ *
+ * https://tailwindcss.com/docs/theme
+ */
+
+/**
+ * Your theme variables are merged with Tailwind’s defaults, either extending
+ * the default theme with new variables or overriding the values of existing
+ * variables.
+ */
+@theme {
+	/**
+	 * These theme variables use CSS variables set by WordPress using values
+	 * from your `theme.json` file.
+	 *
+	 * If you are using the classic editor, you should use hardcoded color
+	 * values instead of the `var()` functions below.
+     */
+	--color-neutral-black: #000000;
+	--color-neutral-white: #ffffff;
+	--color-neutral-grey-1: #f2f2f2;
+	--color-neutral-grey-2: #d9d9d9;
+	--color-neutral-grey-3: #a8a8a8;
+	--color-system-error: #c40505;
+
+	/* Brand colors are set from the page settings. These are just fallback values */
+	--color-brand-primary: #000000;
+	--color-brand-secondary: #f2f2f2;
+
+	/* Typography - Font Families */
+	--font-primary: "Neue-grotesk-display-pro", Arial, sans-serif;
+
+	/* Typography - Font Styles */
+	--text-h1: 3.5rem;
+	--text-h1--line-height: 4rem;
+
+	--text-h2: 2.5rem;
+	--text-h2--line-height: 3.5rem;
+
+	--text-h3: 1.5rem;
+	--text-h3--line-height: 2rem;
+
+	--text-h1-mobile: 2rem;
+	--text-h1-mobile--line-height: 2.5rem;
+
+	--text-h2-mobile: 1.5rem;
+	--text-h2-mobile--line-height: 2rem;
+
+	--text-body-l: 1.5rem;
+	--text-body-l--line-height: 2rem;
+
+	--text-body-m: 1.25rem;
+	--text-body-m--line-height: 1.75rem;
+
+	--text-body-s: 1rem;
+	--text-body-s--line-height: 1.5rem;
+
+	--text-body-xs: 0.875rem;
+	--text-body-xs--line-height: 1.25rem;
+}

@@ -1,0 +1,18 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/hero",
+	"title": "Hero",
+	"description": "Hero block",
+	"style": ["file:./hero.css"],
+	"category": "global",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "hero"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "hero.php"
+	},
+	"supports": {
+		"anchor": false,
+		"mode": false
+	}
+}
