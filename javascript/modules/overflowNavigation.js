@@ -20,8 +20,6 @@ export function overflowNavigation() {
 		const navWrap = target.querySelector('[data-nav-slider="wrap"]');
 		const navLinks = navWrap.querySelectorAll('[data-nav-slider="item"]');
 
-		let currentStartIndex = 0; // Track the first visible slide index
-
 		function adjustNavWidth(instant = false) {
 			// Max width = container width - wrap padding width
 			const maxWidth =
@@ -30,13 +28,16 @@ export function overflowNavigation() {
 
 			let navItemsWidth = 0;
 			const startIndex = Math.min(
-				currentStartIndex,
+				getFirstVisibleIndex(),
 				navLinks.length - visibleCount
 			);
 			const endIndex = Math.min(
 				startIndex + visibleCount,
-				navLinks.length
+				navLinks.length - 1
 			);
+
+			console.log(`startIndex: ${startIndex}`);
+			console.log(`endIndex: ${endIndex}`);
 			for (let i = startIndex; i < endIndex; i++) {
 				navItemsWidth += navLinks[i].offsetWidth;
 			}
@@ -63,6 +64,9 @@ export function overflowNavigation() {
 				block: 'nearest',
 				inline: inline,
 			});
+
+			// Adjust nav width to fit items
+			adjustNavWidth();
 		}
 
 		function isNavLinkVisible(activeIndex) {
@@ -120,19 +124,17 @@ export function overflowNavigation() {
 
 		nextButton.addEventListener('click', () => {
 			// Check if last visible is not last nav link
-			if (getLastVisibleIndex() < navLinks.length - 1) {
-				currentStartIndex++;
-				scrollToIndex(currentStartIndex);
-				adjustNavWidth();
+			const lastVisibleIndex = getLastVisibleIndex();
+			if (lastVisibleIndex < navLinks.length - 1) {
+				scrollToIndex(lastVisibleIndex + 1, 'smooth', 'end');
 			}
 		});
 
 		prevButton.addEventListener('click', () => {
 			// Move backward by 1
-			if (currentStartIndex > 0) {
-				currentStartIndex--;
-				scrollToIndex(currentStartIndex);
-				adjustNavWidth();
+			const firstVisibleIndex = getFirstVisibleIndex();
+			if (firstVisibleIndex > 0) {
+				scrollToIndex(firstVisibleIndex - 1, 'smooth', 'start');
 			}
 		});
 

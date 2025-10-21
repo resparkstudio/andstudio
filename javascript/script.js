@@ -26,7 +26,8 @@ import {
 	footerPin,
 	setActiveNavLink,
 } from './modules/animations';
-import { strategy6Swiper, navigationSwiper } from './modules/swipers';
+import { strategy6Swiper } from './modules/swipers';
+import { overflowNavigation } from './modules/overflowNavigation';
 
 // These functions will be called again on pageLoaded event (scroll transition)
 function initPageLoaded(
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	subpageMenuAnimation();
 	activeMenuItemDisplay();
 	heroRevealAnimation();
-	navigationSwiper();
+	overflowNavigation();
 });
 
 document.addEventListener('pageLoaded', (e) => {
