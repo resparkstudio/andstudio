@@ -1,0 +1,17 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/page-end",
+	"title": "Page End",
+	"description": "page-end block",
+	"style": ["file:./page-end.css"],
+	"category": "global",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "page-end"],
+	"acf": {
+		"renderTemplate": "page-end.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": false
+	}
+}

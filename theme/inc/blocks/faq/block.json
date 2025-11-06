@@ -1,0 +1,17 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/faq",
+	"title": "FAQ",
+	"description": "faq block",
+	"style": ["file:./faq.css"],
+	"category": "global",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "faq"],
+	"acf": {
+		"renderTemplate": "faq.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": false
+	}
+}

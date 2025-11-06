@@ -1,0 +1,25 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/block-2",
+	"title": "block-2",
+	"description": "block-2 block",
+	"style": ["file:./block-2.css"],
+	"category": "content",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "block-2"],
+	"acf": {
+		"renderTemplate": "block-2.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": false
+	},
+	 "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "preview_image": "preview.jpg"
+            }
+        }
+}
+}

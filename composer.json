@@ -18,5 +18,8 @@
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
+	},
+	"require": {
+		"spatie/color": "^1.8"
 	}
 }

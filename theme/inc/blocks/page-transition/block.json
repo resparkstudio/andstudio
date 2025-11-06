@@ -13,13 +13,5 @@
 	},
 	"supports": {
 		"anchor": false
-	},
- "example": {
-        "attributes": {
-            "mode": "preview",
-            "data": {
-                "preview_image": "preview.jpg"
-            }
-        }
-}
+	}
 }

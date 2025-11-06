@@ -20,9 +20,10 @@ export function overflowNavigation() {
 		const navWrap = target.querySelector('[data-nav-slider="wrap"]');
 		const navLinks = navWrap.querySelectorAll('[data-nav-slider="item"]');
 
-		let currentStartIndex = 0; // Track the first visible slide index
+		let currentStartIndex = 0;
 
 		function adjustNavWidth(instant = false) {
+			return;
 			// Max width = container width - wrap padding width
 			const maxWidth =
 				target.offsetWidth -
@@ -37,8 +38,14 @@ export function overflowNavigation() {
 				startIndex + visibleCount,
 				navLinks.length
 			);
+
+			console.log(`startIndex: ${startIndex}`);
+			console.log(`endIndex: ${endIndex}`);
+
+			// Add all visible link widths
 			for (let i = startIndex; i < endIndex; i++) {
 				navItemsWidth += navLinks[i].offsetWidth;
+				console.log(navLinks[i].offsetWidth);
 			}
 
 			// Add gaps
@@ -46,6 +53,8 @@ export function overflowNavigation() {
 			navItemsWidth += (visibleItemCount - 1) * 32;
 
 			const finalWidth = Math.min(navItemsWidth, maxWidth);
+
+			console.log(finalWidth);
 
 			gsap.to(navWrap, {
 				width: finalWidth,
@@ -63,6 +72,9 @@ export function overflowNavigation() {
 				block: 'nearest',
 				inline: inline,
 			});
+
+			// Adjust nav width to fit items
+			adjustNavWidth();
 		}
 
 		function isNavLinkVisible(activeIndex) {
@@ -100,7 +112,7 @@ export function overflowNavigation() {
 				navWrap.querySelector('.is-current')?.parentElement;
 			if (!activeLink) {
 				currentStartIndex = 0;
-				adjustNavWidth(true);
+				// adjustNavWidth(true);
 				return;
 			}
 
@@ -109,30 +121,32 @@ export function overflowNavigation() {
 
 			if (isVisible) {
 				currentStartIndex = 0;
-				adjustNavWidth(true);
+				// adjustNavWidth(true);
 			} else {
 				scrollToIndex(activeNavIndex, behavior, 'end');
 				// Sync currentStartIndex with what's actually visible after scroll
-				currentStartIndex = getFirstVisibleIndex();
-				adjustNavWidth(true);
+				currentStartIndex = Math.max(
+					activeNavIndex - (visibleCount - 1),
+					0
+				);
+
+				adjustNavWidth();
 			}
 		}
 
 		nextButton.addEventListener('click', () => {
 			// Check if last visible is not last nav link
-			if (getLastVisibleIndex() < navLinks.length - 1) {
-				currentStartIndex++;
-				scrollToIndex(currentStartIndex);
-				adjustNavWidth();
+			const lastVisibleIndex = getLastVisibleIndex();
+			if (lastVisibleIndex < navLinks.length - 1) {
+				scrollToIndex(lastVisibleIndex + 1, 'smooth', 'end');
 			}
 		});
 
 		prevButton.addEventListener('click', () => {
 			// Move backward by 1
-			if (currentStartIndex > 0) {
-				currentStartIndex--;
-				scrollToIndex(currentStartIndex);
-				adjustNavWidth();
+			const firstVisibleIndex = getFirstVisibleIndex();
+			if (firstVisibleIndex > 0) {
+				scrollToIndex(firstVisibleIndex - 1, 'smooth', 'start');
 			}
 		});
 

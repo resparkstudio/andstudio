@@ -352,6 +352,9 @@ export function subpageMenuAnimation() {
 		const closeBtn = container.querySelector(
 			'[data-submenu-animation="close-btn"]'
 		);
+		const subpageLinks = container.querySelectorAll(
+			'[data-submenu-animation="link"]'
+		);
 
 		let mm = gsap.matchMedia();
 
@@ -451,10 +454,19 @@ export function subpageMenuAnimation() {
 						modal,
 						{
 							opacity: 1,
-							ease: 'linear',
+							ease: 'power2.out',
 							duration: 0.3,
 						},
 						'<0.6'
+					)
+					.from(
+						subpageLinks,
+						{
+							clipPath: 'inset(50% 20% 0% 20% round 20px)',
+							duration: 0.3,
+							ease: 'power2.out',
+						},
+						'<'
 					);
 
 				masterTl.restart();
@@ -534,7 +546,6 @@ export function subpageMenuAnimation() {
 }
 
 // Kai atidaromas main menu if submenu parent active - showSubmenu()
-
 export function activeMenuItemDisplay() {
 	let currentPageLink;
 	let activeLink;
@@ -659,6 +670,13 @@ export function heroScrollAnimation(container) {
 				start: 'top top',
 				end: '+=600',
 				scrub: true,
+				onLeave: () => {
+					// Clear transform AFTER animation completes
+					gsap.set(contentWrap, { clearProps: 'transform' });
+					setTimeout(() => {
+						ScrollTrigger.refresh();
+					}, 100);
+				},
 			},
 		});
 
@@ -679,16 +697,16 @@ export function footerTextFit(container) {
 	targets.forEach((target) => {
 		textFit(target, {
 			maxFontSize: 9999,
+			widthOnly: true,
 		});
 	});
 
-	// Call on resize with debounce to avoid performance issues
 	let resizeTimer;
 	window.addEventListener('resize', () => {
 		clearTimeout(resizeTimer);
 		resizeTimer = setTimeout(() => {
 			footerTextFit(container);
-		}, 100);
+		}, 250);
 	});
 }
 
@@ -733,4 +751,38 @@ export function setActiveNavLink() {
 
 	const activeNavChanged = new CustomEvent('activeNavChanged');
 	document.dispatchEvent(activeNavChanged);
+}
+
+export function horizontalScrollGallery(container) {
+	const scrollTracks = container.querySelectorAll(
+		'[data-scroll-gallery="track"]'
+	);
+
+	if (!scrollTracks) return;
+
+	scrollTracks.forEach((track) => {
+		const galleryWrap = track.querySelector('[data-scroll-gallery="wrap"]');
+
+		let mm = gsap.matchMedia();
+
+		mm.add('(min-width: 768px)', () => {
+			const scrollAmount = galleryWrap.scrollWidth - track.offsetWidth;
+
+			track.style.height = `${window.innerHeight + scrollAmount}px`;
+
+			let tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: track,
+					start: 'top top',
+					end: 'bottom bottom',
+					scrub: true,
+				},
+			});
+
+			tl.to(galleryWrap, {
+				x: -scrollAmount,
+			});
+			return () => {};
+		});
+	});
 }

@@ -8,6 +8,11 @@
  * @package andstudio
  */
 
+// Load Composer autoloader
+if (file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
+	require_once dirname(__DIR__) . '/vendor/autoload.php';
+}
+
 if (! defined('ANDSTUDIO_VERSION')) {
 	/*
 	 * Set the theme’s version number.

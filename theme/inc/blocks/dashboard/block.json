@@ -1,0 +1,17 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/dashboard",
+	"title": "Dashboard",
+	"description": "dashboard block",
+	"style": ["file:./dashboard.css"],
+	"category": "global",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "dashboard"],
+	"acf": {
+		"renderTemplate": "dashboard.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": false
+	}
+}

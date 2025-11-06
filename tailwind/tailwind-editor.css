@@ -14,7 +14,3 @@
 .wp-block-post-title {
 	@apply hidden;
 }
-
-.hero-block_image {
-	@apply !absolute;
-}

@@ -9,7 +9,8 @@
 	"keywords": ["andstudio", "content-wrap"],
 	"acf": {
 		"mode": "preview",
-		"renderTemplate": "content-wrap.php"
+		"renderTemplate": "content-wrap.php",
+		"blockVersion": 3
 	},
 	"supports": {
 		"anchor": false,

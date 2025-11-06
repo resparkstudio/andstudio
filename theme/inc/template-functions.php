@@ -226,11 +226,10 @@ function andstudio_set_brand_colors() {
 	// Only run on pages (frontend) or in block editor
 	if (!is_page()) return;
 
+	$parent_brand_id = andstudio_get_brand_parent_id($post);
 
-	$parent_id = andstudio_get_top_parent_id($post);
-
-	$primary_color   = get_field('brand_primary_color', $parent_id) ?: '#000000';
-	$secondary_color = get_field('brand_secondary_color', $parent_id) ?: '#f2f2f2';
+	$primary_color   = get_field('brand_primary_color', $parent_brand_id) ?: '#000000';
+	$secondary_color = get_field('brand_secondary_color', $parent_brand_id) ?: '#f2f2f2';
 	?>
 		<style>
 			:root {
@@ -244,7 +243,7 @@ add_action('wp_head', 'andstudio_set_brand_colors');
 
 
 /**
- * Output brand color styles in the block editor (including iframe)
+ * Output brand color styles in the block editor
  */
 function andstudio_set_brand_colors_editor() {
 	// Only run in admin (block editor)
@@ -253,10 +252,10 @@ function andstudio_set_brand_colors_editor() {
 	global $post;
 	if (!$post) return;
 
-	$parent_id = andstudio_get_top_parent_id($post);
+	$parent_brand_id = andstudio_get_brand_parent_id($post);
 
-	$primary_color   = get_field('brand_primary_color', $parent_id) ?: '#000000';
-	$secondary_color = get_field('brand_secondary_color', $parent_id) ?: '#f2f2f2';
+	$primary_color   = get_field('brand_primary_color', $parent_brand_id) ?: '#000000';
+	$secondary_color = get_field('brand_secondary_color', $parent_brand_id) ?: '#f2f2f2';
 
 	$custom_css = "
 		:root {
@@ -408,3 +407,47 @@ function inherit_password_on_creation($post_id, $post) {
  * Remove native password form from pages since we are handling it custom way
  */
 add_filter('post_password_required', '__return_false');
+
+
+/**
+ * Limit ACF Page Link field to show only child pages of top parent
+ */
+function andstudio_limit_page_link_to_children($args, $field, $post_id) {
+	$allowed_keys = [
+		'field_6909d316bb924',
+		'field_690b1b96d477c',
+		'field_68ee613fef7b3',
+		'field_6904bf01c49d2'
+	];
+
+	if (!in_array($field['key'], $allowed_keys)) {
+		return $args;
+	}
+
+
+	$post = get_post($post_id);
+
+	$top_parent_id = andstudio_get_top_parent_id($post);
+
+	if ($top_parent_id) {
+		// Get all descendant page IDs
+		$children = get_page_children($top_parent_id, get_pages());
+
+		error_log('Children:' . print_r($children, true));
+
+		$child_ids = [];
+		foreach ($children as $page) {
+			$child_ids[] = $page->ID;
+		}
+
+
+		error_log('Children IDs: ' . print_r($child_ids, true));
+
+		// Include top parent + all descendants
+		$args['post__in'] = $child_ids;
+	}
+
+	return $args;
+}
+add_filter('acf/fields/page_link/query', 'andstudio_limit_page_link_to_children', 10, 3);
+add_filter('acf/fields/post_object/query', 'andstudio_limit_page_link_to_children', 10, 3);

@@ -10,11 +10,11 @@
 
 global $post;
 
-$parent_id = andstudio_get_top_parent_id($post);
+$parent_id = andstudio_get_brand_parent_id($post);
 
 $hasPassword = $post->post_password ? true : false;
 
-$brand_logo = get_field('brand_logo', $parent_id);
+$logo = get_field('intro_logo', $parent_id);
 $images = get_field('intro_images', $parent_id);
 
 
@@ -70,12 +70,12 @@ $image_classes_config = [
 
     <div data-intro-content class="container relative z-30 md:w-auto">
         <div class="px-5 pb-8 pt-10 md:px-8 md:pt-16 bg-neutral-white flex flex-col items-center rounded-lg md:max-w-sm">
-            <img class="h-12 mb-10 md:h-14" src="<?php echo esc_url($brand_logo['url']) ?>" alt="">
+            <img class="h-12 mb-5 md:mb-10 md:h-14" src="<?php echo esc_url($logo['url']) ?>" alt="">
             <!-- Display intro content -->
             <?php if ($hasPassword) :
                 echo get_the_password_form();
             else : ?>
-                <button class="btn-primary w-full" data-intro-enter-btn="<?php echo esc_attr($post->ID) ?>">Enter</button>
+                <button class="w-full mt-4 bg-neutral-black text-neutral-white border rounded-lg py-3 px-8" data-intro-enter-btn="<?php echo esc_attr($post->ID) ?>">Enter</button>
             <?php endif ?>
         </div>
     </div>

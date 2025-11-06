@@ -79,7 +79,7 @@ $pages = andstudio_get_direct_child_pages($top_parent_id);
         <!-- Bottom menu content -->
         <div data-menu-animation="privacy-wrap" class="mt-18 px-1 w-full">
             <div class="flex justify-between">
-                <span class="text-xs text-neutral-black">© 2025 Company. All rights reserved.
+                <span class="text-xs text-neutral-black">© <?php echo esc_html(date("Y")) ?> Company. All rights reserved.
                     <a class="underline" href="">Privacy policy</a>
                 </span>
                 <a target="_blank" href="https://byandstudio.com/">

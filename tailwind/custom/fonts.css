@@ -11,3 +11,11 @@
 	font-style: normal;
 	font-display: swap; /* Optional but recommended for better performance */
 }
+
+@font-face {
+	font-family: "Neue-grotesk-display-pro";
+	src: url("fonts/NHaasGroteskDSPro-65Md.otf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap; /* Optional but recommended for better performance */
+}

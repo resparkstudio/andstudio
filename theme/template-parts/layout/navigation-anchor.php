@@ -41,7 +41,7 @@ if (empty($page_anchor_links)) return;
 <div class="hidden md:block fixed left-1/2 -translate-x-1/2 z-20 bottom-20">
     <div class="bg-neutral-grey-1 p-4 flex gap-5">
         <?php foreach ($page_anchor_links as $link) : ?>
-            <a class="text-body-l" href="<?php echo esc_url($link['slug']) ?>"><?php echo esc_html($link['title']) ?></a>
+            <a class="text-body-l" href="#<?php echo esc_attr($link['slug']) ?>"><?php echo esc_html($link['title']) ?></a>
         <?php endforeach ?>
     </div>
 </div>

@@ -6,7 +6,29 @@
  * file and is applied both to the front end and in the block editor.
  */
 
+/* html {
+	font-size: 1.3125rem;
+}
+@media screen and (max-width: 1920px) {
+	html {
+		font-size: calc(0.06249999999999967rem + 1.041666666666667vw);
+	}
+}
+@media screen and (max-width: 1440px) {
+	html {
+		font-size: calc(0.5317377731529657rem + 0.5202913631633715vw);
+	}
+}
+@media screen and (max-width: 479px) {
+	html {
+		font-size: calc(0.9994769874476988rem + 0.8368200836820083vw);
+	}
+} */
+
 /* tailwind/custom/base.css */
+html {
+	scroll-behavior: smooth;
+}
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

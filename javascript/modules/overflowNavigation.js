@@ -4,6 +4,7 @@
 import gsap from 'gsap';
 
 export function overflowNavigation() {
+	return;
 	const visibleCount = 5;
 	const overflowNavTargets = document.querySelectorAll(
 		'[data-nav-slider="target"]'
@@ -20,6 +21,8 @@ export function overflowNavigation() {
 		const navWrap = target.querySelector('[data-nav-slider="wrap"]');
 		const navLinks = navWrap.querySelectorAll('[data-nav-slider="item"]');
 
+		let currentStartIndex = 0;
+
 		function adjustNavWidth(instant = false) {
 			// Max width = container width - wrap padding width
 			const maxWidth =
@@ -28,16 +31,15 @@ export function overflowNavigation() {
 
 			let navItemsWidth = 0;
 			const startIndex = Math.min(
-				getFirstVisibleIndex(),
+				currentStartIndex,
 				navLinks.length - visibleCount
 			);
 			const endIndex = Math.min(
 				startIndex + visibleCount,
-				navLinks.length - 1
+				navLinks.length
 			);
 
-			console.log(`startIndex: ${startIndex}`);
-			console.log(`endIndex: ${endIndex}`);
+			// Add all visible link widths
 			for (let i = startIndex; i < endIndex; i++) {
 				navItemsWidth += navLinks[i].offsetWidth;
 			}
@@ -59,14 +61,47 @@ export function overflowNavigation() {
 		function scrollToIndex(index, behavior = 'smooth', inline = 'start') {
 			const targetLink = navLinks[index];
 			if (!targetLink) return;
-			targetLink.scrollIntoView({
-				behavior: behavior,
-				block: 'nearest',
-				inline: inline,
-			});
 
-			// Adjust nav width to fit items
-			adjustNavWidth();
+			// Calculate new width
+			const maxWidth =
+				target.offsetWidth -
+				(navContainer.offsetWidth - navWrap.offsetWidth);
+			let navItemsWidth = 0;
+			const startIndex = Math.min(
+				currentStartIndex,
+				navLinks.length - visibleCount
+			);
+			const endIndex = Math.min(
+				startIndex + visibleCount,
+				navLinks.length
+			);
+
+			for (let i = startIndex; i < endIndex; i++) {
+				navItemsWidth += navLinks[i].offsetWidth;
+			}
+			navItemsWidth += (endIndex - startIndex - 1) * 32;
+			const finalWidth = Math.min(navItemsWidth, maxWidth);
+
+			// targetLink.scrollIntoView({
+			// 	behavior: 'smooth',
+			// 	block: 'nearest',
+			// 	inline: inline,
+			// });
+
+			// Animate width with continuous scroll updates
+			gsap.to(navWrap, {
+				width: finalWidth,
+				duration: behavior === 'instant' ? 0 : 0.2,
+				ease: 'custom',
+				overwrite: true,
+				onUpdate: () => {
+					targetLink.scrollIntoView({
+						behavior: 'smooth',
+						block: 'nearest',
+						inline: inline,
+					});
+				},
+			});
 		}
 
 		function isNavLinkVisible(activeIndex) {
@@ -99,26 +134,14 @@ export function overflowNavigation() {
 			return 0;
 		}
 
-		function scrollToActiveLink(behavior = 'smooth') {
+		function getActiveLinkIndex() {
 			const activeLink =
 				navWrap.querySelector('.is-current')?.parentElement;
 			if (!activeLink) {
-				currentStartIndex = 0;
-				adjustNavWidth(true);
-				return;
-			}
-
-			const activeNavIndex = Array.from(navLinks).indexOf(activeLink);
-			const isVisible = isNavLinkVisible(activeNavIndex); // Fixed: was activeIndex
-
-			if (isVisible) {
-				currentStartIndex = 0;
-				adjustNavWidth(true);
+				return 0;
 			} else {
-				scrollToIndex(activeNavIndex, behavior, 'end');
-				// Sync currentStartIndex with what's actually visible after scroll
-				currentStartIndex = getFirstVisibleIndex();
-				adjustNavWidth(true);
+				return (activeNavIndex =
+					Array.from(navLinks).indexOf(activeLink));
 			}
 		}
 
@@ -126,7 +149,11 @@ export function overflowNavigation() {
 			// Check if last visible is not last nav link
 			const lastVisibleIndex = getLastVisibleIndex();
 			if (lastVisibleIndex < navLinks.length - 1) {
-				scrollToIndex(lastVisibleIndex + 1, 'smooth', 'end');
+				const nextIndex = lastVisibleIndex + 1;
+
+				// Get previous 4 items
+				currentStartIndex = Math.max(nextIndex - (visibleCount - 1), 0); // Move this to scrollToIndex
+				scrollToIndex(nextIndex, 'smooth', 'end');
 			}
 		});
 
@@ -142,8 +169,10 @@ export function overflowNavigation() {
 			adjustNavWidth();
 		});
 
-		// Initial setup
+		// 1. nitial width adjustment
 		adjustNavWidth(true);
-		scrollToActiveLink('instant');
+		// 2. Check if active link is visible and scroll to it if not
+		if (!isNavLinkVisible(getActiveLinkIndex()))
+			scrollToIndex(getActiveLinkIndex());
 	});
 }

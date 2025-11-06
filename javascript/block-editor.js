@@ -18,7 +18,6 @@
  * post type when modifying the block editor’s appearance.
  */
 // import '@_tw/typography/block-editor-classes';
-
 wp.domReady(() => {
 	/**
 	 * Add support for Tailwind Typography’s `lead` class via a block style.

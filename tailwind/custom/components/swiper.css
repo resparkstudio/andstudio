@@ -1,0 +1,64 @@
+@import "swiper/css";
+
+.swiper-button-disabled {
+	@apply pointer-events-none opacity-40;
+}
+
+[data-swiper="navigation"].swiper-initialized .swiper-wrapper {
+	@apply gap-0;
+}
+
+[data-swiper="block-17"] .swiper-slide {
+	@apply transition-all duration-800;
+}
+
+[data-swiper="block-17"] .swiper-slide.swiper-slide-next {
+	@apply md:!w-[25%];
+}
+[data-swiper="block-17"] .swiper-slide.swiper-slide-prev {
+	@apply md:!w-[25%];
+}
+
+[data-swiper="block-17"] .swiper-slide.swiper-slide-active {
+	@apply md:!w-[50%];
+}
+
+/* Mobile */
+[data-swiper="block-17"] .swiper-slide img {
+	@apply origin-top-left transition-all duration-600;
+}
+[data-swiper="block-17"] .swiper-slide.swiper-slide-next img {
+	@apply scale-65 md:scale-100;
+}
+[data-swiper="block-17"] .swiper-slide.swiper-slide-prev img {
+	@apply origin-top-right scale-65 md:scale-100;
+}
+
+.pagination-bullet {
+	@apply bg-neutral-grey-1 relative isolate flex h-7 w-7 cursor-pointer items-center justify-center overflow-hidden rounded-sm;
+}
+
+/* Background number (always visible in dark) */
+.pagination-bg {
+	@apply text-body-xs absolute z-10 text-black;
+}
+
+/* Foreground layer with fill and white number */
+.pagination-fg {
+	@apply text-body-xs bg-brand-primary absolute z-20 flex h-full w-full items-center justify-center text-white;
+	clip-path: inset(0 100% 0 0); /* Hidden by default */
+}
+
+/* Active bullet animation */
+.swiper-pagination-bullet-active .pagination-fg {
+	animation: revealText 3800ms linear forwards;
+}
+
+@keyframes revealText {
+	from {
+		clip-path: inset(0 100% 0 0);
+	}
+	to {
+		clip-path: inset(0 0 0 0);
+	}
+}

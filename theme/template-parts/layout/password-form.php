@@ -32,7 +32,7 @@ $page_id = get_the_ID();
     <button
         type="submit"
         name="Submit"
-        class="btn-primary w-full mt-4">
+        class="w-full mt-4 bg-neutral-black text-neutral-white border rounded-lg py-3 px-8">
         <?php _e('Enter', 'andstudio'); ?>
     </button>
 </form>

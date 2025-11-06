@@ -16,6 +16,7 @@ $text_color = $thumbnail_url ? 'text-neutral-white' : 'text-neutral-black';
 
 <a
     href="<?php echo esc_url($page_url) ?>"
+    data-submenu-animation="link"
     class="<?php echo esc_attr($mobile_align_class) ?> group w-full h-full bg-brand-secondary md:hover:bg-brand-primary transition-colors duration-300 rounded-xl p-5 text-body-m flex justify-between relative overflow-hidden md:p-4 md:pl-6 md:flex-col md:items-start">
 
     <?php if ($thumbnail_url) : ?>

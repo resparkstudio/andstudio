@@ -1,0 +1,17 @@
+{
+	"apiVersion": 3,
+	"name": "andstudio/contact",
+	"title": "Contact",
+	"description": "contact block",
+	"style": ["file:./contact.css"],
+	"category": "global",
+	"icon": "admin-comments",
+	"keywords": ["andstudio", "contact"],
+	"acf": {
+		"renderTemplate": "contact.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": false
+	}
+}
