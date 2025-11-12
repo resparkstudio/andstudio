@@ -50,23 +50,23 @@ andstudio_display_block_preview_img($block)
             <!-- Desktop horizontal scroll -->
             <div data-scroll-gallery="track" class="hidden md:block mt-16 relative">
                 <!-- Track -->
-                <div class="h-screen w-dvw -ml-32 pl-32 overflow-hidden sticky top-0 flex">
+                <div class="h-screen -ml-32 pl-32 overflow-hidden sticky top-0 flex">
                     <div data-scroll-gallery="wrap" class="h-full flex gap-5 min-h-0">
                         <!-- First image -->
-                        <img class="h-full shrink-0" src="<?php echo esc_url($first_image['url']) ?>" alt="">
+                        <img class="h-full shrink-0" src="<?php echo esc_url($first_image['url']) ?>" alt="<?php echo esc_attr($first_image['alt']) ?>">
 
                         <!-- Smaller rows wrap -->
-                        <div class="flex flex-col gap-5">
+                        <div class="flex flex-col gap-5 shrink-0">
                             <!-- Top row -->
                             <div class="grow flex gap-5 min-h-0">
                                 <?php foreach ($top_row as $image) : ?>
-                                    <img class="h-full shrink-0" src="<?php echo esc_url($image['url']) ?>" alt="">
+                                    <img class="h-full shrink-0" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
                                 <?php endforeach ?>
                             </div>
                             <!-- Bottom row -->
                             <div class="grow flex gap-5 min-h-0">
                                 <?php foreach ($bottom_row as $image) : ?>
-                                    <img class="h-full shrink-0" src="<?php echo esc_url($image['url']) ?>" alt="">
+                                    <img class="h-full shrink-0" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
                                 <?php endforeach ?>
                             </div>
 

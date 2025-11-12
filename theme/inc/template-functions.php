@@ -223,10 +223,22 @@ add_filter('the_password_form', 'andstudio_password_form');
 function andstudio_set_brand_colors() {
 	global $post;
 
-	// Only run on pages (frontend) or in block editor
-	if (!is_page()) return;
+	$parent_brand_id = null;
 
-	$parent_brand_id = andstudio_get_brand_parent_id($post);
+	// Handle regular pages
+	if (is_page() && $post) {
+		$parent_brand_id = andstudio_get_brand_parent_id($post);
+	}
+	// Handle 404 pages - extract brand from URL
+	elseif (is_404()) {
+		$brand_page = andstudio_get_parent_page_from_url();
+		if ($brand_page) {
+			$parent_brand_id = $brand_page->ID;
+		}
+	}
+
+	// If no brand found, exit early
+	if (!$parent_brand_id) return;
 
 	$primary_color   = get_field('brand_primary_color', $parent_brand_id) ?: '#000000';
 	$secondary_color = get_field('brand_secondary_color', $parent_brand_id) ?: '#f2f2f2';
@@ -240,7 +252,6 @@ function andstudio_set_brand_colors() {
 	<?php
 }
 add_action('wp_head', 'andstudio_set_brand_colors');
-
 
 /**
  * Output brand color styles in the block editor
@@ -451,3 +462,14 @@ function andstudio_limit_page_link_to_children($args, $field, $post_id) {
 }
 add_filter('acf/fields/page_link/query', 'andstudio_limit_page_link_to_children', 10, 3);
 add_filter('acf/fields/post_object/query', 'andstudio_limit_page_link_to_children', 10, 3);
+
+
+/**
+ * Redirect index to the main website
+ */
+add_action('template_redirect', function () {
+	if (is_front_page() && !is_admin()) {
+		wp_redirect('https://andstudio.lt/', 301);
+		exit;
+	}
+});

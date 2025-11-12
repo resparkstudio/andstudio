@@ -215,3 +215,19 @@ function andstudio_format_svg_for_output($svg_content, $control_height = false, 
 
     return $dom->saveXML($dom->documentElement);
 }
+
+
+/**
+ * Get parent page from URl
+ */
+function andstudio_get_parent_page_from_url() {
+    $url_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    $path_parts = explode('/', $url_path);
+
+    // Get the first slug which should be brand parent
+    $brand_slug = $path_parts[0] ?? '';
+
+    $brand_page = get_page_by_path($brand_slug, OBJECT, 'page');
+
+    return $brand_page;
+}

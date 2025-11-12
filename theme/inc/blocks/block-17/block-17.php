@@ -48,8 +48,8 @@ andstudio_display_block_preview_img($block);
                         <div data-swiper="block-17" class="mt-8 md:mt-16 md:overflow-hidden">
                             <div class="swiper-wrapper md:aspect-[1240/460]">
                                 <?php foreach ($tab['images'] as $image) : ?>
-                                    <div class="swiper-slide">
-                                        <div class="aspect-[620/460] w-full">
+                                    <div class="swiper-slide w-1/3">
+                                        <div class="test aspect-[620/460] w-full scale-75">
                                             <img class="w-full h-full object-cover" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
                                         </div>
                                     </div>

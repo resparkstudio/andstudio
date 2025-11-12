@@ -4,12 +4,16 @@
  * Menu modal render template used inside header-content.php
  */
 
-global $post;
+// global $post;
 
-$top_parent_id = andstudio_get_top_parent_id($post);
+$parent_page_id = $args['parent_page_id'] ?? null;
+
+if (!$parent_page_id) return;
+
+// $top_parent_id = andstudio_get_top_parent_id($post);
 $current_page_id = get_the_ID();
 
-$pages = andstudio_get_direct_child_pages($top_parent_id);
+$pages = andstudio_get_direct_child_pages($parent_page_id);
 ?>
 
 <!-- Menu modal -->

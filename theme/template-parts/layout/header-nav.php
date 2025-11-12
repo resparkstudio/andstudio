@@ -1,6 +1,8 @@
 <?php
 global $post;
 
+if (!$post) return;
+
 $ancestors = get_post_ancestors($post->ID);
 $ancestors_count = count($ancestors);
 
@@ -25,7 +27,7 @@ if ($ancestors_count === 0) {
 
 ?>
 
-<div class="hidden md:flex rounded-lg grow">
+<div class="hidden md:flex rounded-lg grow min-w-0">
     <div class="bg-neutral-white px-5 py-4 rounded-lg shrink-0 relative z-10">
         <?php echo esc_html($main_title) ?>
     </div>

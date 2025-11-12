@@ -11,10 +11,7 @@
 
 import { initAlpineJS } from './modules/alpine';
 import { pageScrollTransition } from './modules/pageScrollTransition';
-import {
-	ajaxPagePasswordForm,
-	ajaxPageEntryCta,
-} from './modules/ajaxPageIntro';
+import { ajaxPagePasswordForm, ajaxPageEntryCta } from './modules/ajaxPageIntro';
 import {
 	introAnimation,
 	floatingImagesEffect,
@@ -25,22 +22,12 @@ import {
 	heroScrollAnimation,
 	footerTextFit,
 	footerPin,
-	setActiveNavLink,
 	horizontalScrollGallery,
 } from './modules/animations';
-import {
-	block6Swiper,
-	block13Swiper,
-	block17Swiper,
-	block23Swiper,
-	block26Swiper,
-} from './modules/swipers';
-import { overflowNavigation } from './modules/overflowNavigation';
+import { block6Swiper, block13Swiper, block17Swiper, block23Swiper, block26Swiper, navigationSwiper } from './modules/swipers';
 
 // These functions will be called again on pageLoaded event (scroll transition)
-function initPageLoaded(
-	container = document.querySelector('[data-scroll-transition="content"]')
-) {
+function initPageLoaded(container = document.querySelector('[data-scroll-transition="content"]')) {
 	// Intro page for example
 	if (!container) return;
 
@@ -57,7 +44,7 @@ function initPageLoaded(
 
 // These functions will be called when previous page is removed (scroll transition)
 function initPageSwitched() {
-	setActiveNavLink();
+	// setActiveNavLink();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -73,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	subpageMenuAnimation();
 	activeMenuItemDisplay();
 	heroRevealAnimation();
-	overflowNavigation();
+	navigationSwiper();
 });
 
 document.addEventListener('pageLoaded', (e) => {

@@ -10,45 +10,62 @@
 
 global $post;
 
+$parent_page_id = null;
+
+if (is_404()) {
+    $parent_page_id = andstudio_get_parent_page_from_url()?->ID;
+} else {
+    $parent_page_id = andstudio_get_top_parent_id($post);
+}
+
 // Do not render header content if user not authenticated
-if (!isset($_COOKIE['hide_intro']) || intval($_COOKIE['hide_intro']) !== andstudio_get_top_parent_id($post)) {
+if (!isset($_COOKIE['hide_intro']) || intval($_COOKIE['hide_intro']) !== andstudio_get_top_parent_id($post) && !is_404()) {
     return;
 }
 
-$parent_id = andstudio_get_top_parent_id($post);
+// $parent_id = andstudio_get_top_parent_id($post);
 $current_page_id = get_the_ID();
-$nav_logo = get_field('nav_logo', $parent_id);
-$download_links = get_field('download_links', $parent_id);
+$nav_logo = get_field('nav_logo', $parent_page_id);
+$download_links = get_field('download_links', $parent_page_id);
 
-$sub_pages = get_children([
-    'post_parent' => $parent_id,
-    'post_type' => 'page',
-    'post_status' => 'publish',
-    'orderby' => 'menu_order',
-    'order' => 'ASC',
-]);
+if ($parent_page_id) {
+    $sub_pages = get_children([
+        'post_parent' => $parent_page_id,
+        'post_type' => 'page',
+        'post_status' => 'publish',
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+    ]);
+}
+
 ?>
-<?php get_template_part('template-parts/layout/menu') ?>
+<?php get_template_part('template-parts/layout/menu', null, [
+    'parent_page_id' => $parent_page_id
+]) ?>
 <?php get_template_part('template-parts/layout/navigation-anchor') ?>
 
 <header data-hero-reveal="header" id="masthead" class="fixed z-100 top-0 w-full">
     <div class="container-lg flex justify-between pt-5 gap-8">
-        <div class="flex md:w-full">
-            <div class="relative bg-neutral-white px-4 py-2 rounded-lg flex items-center gap-x-1.5 md:gap-x-6 shrink-0">
-                <button data-menu-animation="open-btn">
-                    <svg class="w-7 h-7" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M25.5407 14H2.06227" stroke="black" stroke-linecap="square" stroke-linejoin="round" />
-                        <path d="M25.4384 22.8042H1.54069" stroke="black" stroke-linecap="square" stroke-linejoin="round" />
-                        <path d="M25.4384 5.1958L1.54069 5.1958" stroke="black" stroke-linecap="square" stroke-linejoin="round" />
-                    </svg>
-                </button>
+        <div class="flex grow min-w-0">
+            <?php if (!empty($sub_pages) || $nav_logo) : ?>
+                <div class="bg-neutral-white px-4 py-2 rounded-lg flex items-center gap-x-1.5 md:gap-x-6 shrink-0">
+                    <?php if (!empty($sub_pages)) : ?>
+                        <button data-menu-animation="open-btn">
+                            <svg class="w-7 h-7" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M25.5407 14H2.06227" stroke="black" stroke-linecap="square" stroke-linejoin="round" />
+                                <path d="M25.4384 22.8042H1.54069" stroke="black" stroke-linecap="square" stroke-linejoin="round" />
+                                <path d="M25.4384 5.1958L1.54069 5.1958" stroke="black" stroke-linecap="square" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    <?php endif ?>
 
-                <?php if ($nav_logo) : ?>
-                    <a href="<?php echo esc_url(get_page_link($parent_id)) ?>">
-                        <img class="h-6 md:h-9" src="<?php echo esc_url($nav_logo['url']) ?>" alt="<?php echo esc_attr($nav_logo['alt']) ?>">
-                    </a>
-                <?php endif ?>
-            </div>
+                    <?php if ($nav_logo) : ?>
+                        <a href="<?php echo esc_url(get_page_link($parent_page_id)) ?>">
+                            <img class="h-6 md:h-9" src="<?php echo esc_url($nav_logo['url']) ?>" alt="<?php echo esc_attr($nav_logo['alt']) ?>">
+                        </a>
+                    <?php endif ?>
+                </div>
+            <?php endif ?>
             <?php get_template_part('template-parts/layout/header-nav') ?>
         </div>
 

@@ -1,13 +1,8 @@
 // import Swiper JS
 import Swiper from 'swiper';
 import gsap from 'gsap';
-import {
-	Autoplay,
-	Controller,
-	EffectFade,
-	Navigation,
-	Pagination,
-} from 'swiper/modules';
+import { Autoplay, Controller, EffectFade, Navigation, Pagination } from 'swiper/modules';
+import { NavigationSwiper } from './NavigationSwiper';
 
 export function block6Swiper(container) {
 	const swiperTargets = container.querySelectorAll('[data-swiper="block-6"]');
@@ -56,9 +51,7 @@ export function block6Swiper(container) {
 }
 
 export function block13Swiper(container) {
-	const swiperTargets = container.querySelectorAll(
-		'[data-swiper="block-13"]'
-	);
+	const swiperTargets = container.querySelectorAll('[data-swiper="block-13"]');
 
 	if (!swiperTargets.length) return;
 
@@ -71,9 +64,7 @@ export function block13Swiper(container) {
 }
 
 export function block17Swiper(container) {
-	const swiperTargets = container.querySelectorAll(
-		'[data-swiper="block-17"]'
-	);
+	const swiperTargets = container.querySelectorAll('[data-swiper="block-17"]');
 
 	if (!swiperTargets.length) return;
 
@@ -103,17 +94,19 @@ export function block17Swiper(container) {
 			},
 			breakpoints: {
 				768: {
-					slidesPerView: 3,
+					slidesPerView: 'auto',
 				},
 			},
 		});
+
+		setTimeout(() => {
+			swiper.update();
+		}, 1000);
 	});
 }
 
 export function block23Swiper(container) {
-	const swiperTargets = container.querySelectorAll(
-		'[data-swiper="block-23"]'
-	);
+	const swiperTargets = container.querySelectorAll('[data-swiper="block-23"]');
 
 	if (!swiperTargets.length) return;
 
@@ -126,9 +119,7 @@ export function block23Swiper(container) {
 }
 
 export function block26Swiper(container) {
-	const swiperTargets = container.querySelectorAll(
-		'[data-swiper="block-26"]'
-	);
+	const swiperTargets = container.querySelectorAll('[data-swiper="block-26"]');
 
 	if (!swiperTargets.length) return;
 
@@ -138,4 +129,35 @@ export function block26Swiper(container) {
 			spaceBetween: 12,
 		});
 	});
+}
+
+export function navigationSwiper() {
+	const navSwiperTarget = document.querySelector('[data-nav-slider="target"]');
+	if (navSwiperTarget) {
+		// 1. Init custom swiper
+		const navSwiper = new NavigationSwiper(navSwiperTarget);
+
+		// 2. Mark current link
+		function setCurrentLink() {
+			navSwiper.swiperSlides.forEach((slide, index) => {
+				if (slide.href === window.location.href) {
+					slide.classList.add('is-current');
+
+					// If current not visible, scroll it into view
+					if (!navSwiper.isSlideVisible(index)) {
+						navSwiper.scrollToSlide(index);
+					} else {
+						navSwiper.adjustWidth();
+					}
+				} else {
+					slide.classList.remove('is-current');
+				}
+			});
+		}
+		setCurrentLink();
+
+		document.addEventListener('pageSwitched', () => {
+			setCurrentLink();
+		});
+	}
 }
