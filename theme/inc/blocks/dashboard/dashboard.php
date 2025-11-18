@@ -20,7 +20,7 @@ $sub_brands = get_field('sub_brands');
             <div class="bg-neutral-white rounded-lg p-5 pt-10 md:flex md:justify-between md:p-10 md:rounded-xl md:gap-8">
                 <div class="md:flex md:flex-col md:justify-between md:items-start">
                     <?php if ($banner['logo']) : ?>
-                        <img class="h-14.5 w-auto max-w-full md:h-22" src="http://localhost:10030/wp-content/uploads/2025/09/venipak-logo.svg" alt="">
+                        <img class="h-14.5 w-auto max-w-full md:h-22" src="<?php echo esc_url($banner['logo']['url']) ?>" alt="<?php echo esc_attr($banner['logo']['alt']) ?>">
                     <?php endif ?>
 
                     <?php if ($banner['description']) : ?>

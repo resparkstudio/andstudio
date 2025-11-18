@@ -21,7 +21,7 @@ export function pageScrollTransition() {
 		content.remove();
 		setTimeout(() => {
 			ScrollTrigger.refresh();
-		}, 50);
+		}, 0);
 	}
 
 	function updateBrowserState(nextPageUrl) {
