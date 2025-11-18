@@ -6,7 +6,7 @@
  * file and is applied both to the front end and in the block editor.
  */
 
-/* html {
+html {
 	font-size: 1.3125rem;
 }
 @media screen and (max-width: 1920px) {
@@ -23,7 +23,7 @@
 	html {
 		font-size: calc(0.9994769874476988rem + 0.8368200836820083vw);
 	}
-} */
+}
 
 /* tailwind/custom/base.css */
 html {
