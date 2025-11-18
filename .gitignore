@@ -2,14 +2,6 @@
 /node_modules
 /vendor
 
-# Ignore generated JavaScript files:
-*.min.js
-
-# Ignore generated CSS files:
-style.css
-style-editor.css
-style-editor-extra.css
-
 # Ignore the generated zip file:
 andstudio.zip
 
