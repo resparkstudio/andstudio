@@ -77,9 +77,9 @@ export function block17Swiper(container) {
 			slidesPerView: 1.1,
 			centeredSlides: true,
 			loop: true,
-			// autoplay: {
-			// 	delay: 3000,
-			// },
+			autoplay: {
+				delay: 3000,
+			},
 			spaceBetween: 12,
 			speed: 800,
 			pagination: {
