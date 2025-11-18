@@ -1,7 +1,8 @@
 // import Swiper JS
 import Swiper from 'swiper';
 import gsap from 'gsap';
-import { Autoplay, Controller, EffectFade, Navigation, Pagination } from 'swiper/modules';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { NavigationSwiper } from './NavigationSwiper';
 
 export function block6Swiper(container) {
@@ -76,9 +77,9 @@ export function block17Swiper(container) {
 			slidesPerView: 1.1,
 			centeredSlides: true,
 			loop: true,
-			autoplay: {
-				delay: 3000,
-			},
+			// autoplay: {
+			// 	delay: 3000,
+			// },
 			spaceBetween: 12,
 			speed: 800,
 			pagination: {
@@ -94,7 +95,7 @@ export function block17Swiper(container) {
 			},
 			breakpoints: {
 				768: {
-					slidesPerView: 'auto',
+					slidesPerView: 3,
 				},
 			},
 		});
@@ -132,32 +133,133 @@ export function block26Swiper(container) {
 }
 
 export function navigationSwiper() {
-	const navSwiperTarget = document.querySelector('[data-nav-slider="target"]');
-	if (navSwiperTarget) {
-		// 1. Init custom swiper
-		const navSwiper = new NavigationSwiper(navSwiperTarget);
+	const navSwiperTarget = document.querySelector('[data-nav-slider-target="nav"]');
+	if (!navSwiperTarget) return;
 
-		// 2. Mark current link
-		function setCurrentLink() {
-			navSwiper.swiperSlides.forEach((slide, index) => {
-				if (slide.href === window.location.href) {
-					slide.classList.add('is-current');
+	// 1. Init custom swiper
+	const navSwiper = new NavigationSwiper(navSwiperTarget, 5);
+	window.activeNavSwiperInstance = navSwiper;
 
-					// If current not visible, scroll it into view
+	if (navSwiper.swiperSlides.length) {
+		gsap.from(navSwiper.swiperSlides, {
+			opacity: 0,
+			stagger: 0.1,
+			ease: 'linear',
+		});
+	}
+
+	// 2. Mark current link
+	function setCurrentLink() {
+		// Get current URL without hash
+		const currentUrlWithoutHash = window.location.origin + window.location.pathname + window.location.search;
+
+		if (!navSwiper.swiperSlides.length) {
+			gsap.to(navSwiper.target, {
+				x: -32,
+				duration: 0.3,
+				ease: 'smooth',
+			});
+		} else {
+			gsap.to(navSwiper.target, {
+				x: 0,
+				ease: 'smooth',
+			});
+		}
+
+		navSwiper.swiperSlides.forEach((slide, index) => {
+			// Get slide URL without hash
+			const slideUrl = new URL(slide.href);
+			const slideUrlWithoutHash = slideUrl.origin + slideUrl.pathname + slideUrl.search;
+
+			if (slideUrlWithoutHash === currentUrlWithoutHash) {
+				slide.classList.add('is-current');
+
+				// If current not visible, scroll it into view.
+				// Using setTimeout because need to wait for initial adjustWidth to at least partially complete
+				setTimeout(() => {
 					if (!navSwiper.isSlideVisible(index)) {
 						navSwiper.scrollToSlide(index);
 					} else {
 						navSwiper.adjustWidth();
 					}
-				} else {
-					slide.classList.remove('is-current');
-				}
-			});
-		}
-		setCurrentLink();
-
-		document.addEventListener('pageSwitched', () => {
-			setCurrentLink();
+				}, 300);
+			} else {
+				slide.classList.remove('is-current');
+			}
 		});
 	}
+	setCurrentLink();
+
+	// Remove old event listener before adding a new one
+	if (window.activeNavPageSwitchHandler) {
+		document.removeEventListener('pageSwitched', window.activeNavPageSwitchHandler);
+	}
+
+	// Store the handler reference on window
+	window.activeNavPageSwitchHandler = (e) => {
+		if (e.detail.parentPageChanged) return;
+		setCurrentLink();
+	};
+
+	document.addEventListener('pageSwitched', window.activeNavPageSwitchHandler);
+}
+
+export function anchorSwiper() {
+	const navSwiperTarget = document.querySelector('[data-nav-slider-target="anchor"]');
+	const sectionsWrap = document.querySelector('[data-hero-scroll="content-wrap"]');
+
+	if (!navSwiperTarget || !sectionsWrap) return;
+
+	const anchorSections = sectionsWrap.querySelectorAll('section');
+
+	function setActiveLink(activeSectionId) {
+		navSwiper.swiperSlides.forEach((slide, index) => {
+			if (activeSectionId === slide.hash.slice(1)) {
+				slide.classList.add('is-current');
+				// If current not visible, scroll it into view
+				if (!navSwiper.isSlideVisible(index)) {
+					navSwiper.scrollToSlide(index);
+				} else {
+					navSwiper.adjustWidth();
+				}
+			} else {
+				slide.classList.remove('is-current');
+			}
+		});
+	}
+
+	// 1. Init custom swiper
+	const navSwiper = new NavigationSwiper(navSwiperTarget, 5);
+
+	// 2. Set active link
+	anchorSections.forEach((section) => {
+		ScrollTrigger.create({
+			trigger: section,
+			start: 'top center',
+			end: 'bottom center',
+			onEnter: () => {
+				setActiveLink(section.id);
+			},
+			onEnterBack: () => {
+				setActiveLink(section.id);
+			},
+		});
+	});
+
+	// 3. Show/Hide anchor wrap
+	let displayTl = gsap.timeline({
+		scrollTrigger: {
+			trigger: sectionsWrap,
+			start: 'top top',
+			endTrigger: 'footer',
+			end: 'top bottom',
+			toggleActions: 'play reverse play none',
+		},
+	});
+
+	displayTl.to(navSwiperTarget, {
+		autoAlpha: 1,
+		y: 0,
+		duration: 0.1,
+	});
 }

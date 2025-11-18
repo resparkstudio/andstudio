@@ -43,3 +43,8 @@ button {
 .admin-bar header {
 	@apply top-11.5 md:top-8;
 }
+
+/* Alpine JS */
+[x-cloak] {
+	display: none !important;
+}

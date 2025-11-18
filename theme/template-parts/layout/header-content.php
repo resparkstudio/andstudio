@@ -42,7 +42,6 @@ if ($parent_page_id) {
 <?php get_template_part('template-parts/layout/menu', null, [
     'parent_page_id' => $parent_page_id
 ]) ?>
-<?php get_template_part('template-parts/layout/navigation-anchor') ?>
 
 <header data-hero-reveal="header" id="masthead" class="fixed z-100 top-0 w-full">
     <div class="container-lg flex justify-between pt-5 gap-8">
@@ -81,7 +80,7 @@ if ($parent_page_id) {
                     </svg>
                 </button>
 
-                <div class="absolute w-full top-full" x-show="expanded" x-collapse.duration.700ms>
+                <div class="absolute w-full top-full" x-show="expanded" x-collapse.duration.700ms x-cloak>
                     <div class="bg-neutral-grey-1 rounded-lg">
                         <?php foreach ($download_links as $link) :
                             $link_target = $link['link']['target'] ? $link['link']['target'] : '_self'; ?>

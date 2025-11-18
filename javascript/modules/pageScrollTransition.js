@@ -1,16 +1,21 @@
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export function pageScrollTransition() {
-	const content = document.querySelector(
-		'[data-scroll-transition="content"]'
-	);
+	window.addEventListener('popstate', () => {
+		window.location.reload();
+	});
+
+	const content = document.querySelector('[data-scroll-transition="content"]');
 	if (!content) return;
 
 	// Append all content to this container
-	const transitionContainer = document.querySelector(
-		'[data-scroll-transition="container"]'
-	);
-	let newTitle;
+	const transitionContainer = document.querySelector('[data-scroll-transition="container"]');
+	let newTitle = null;
+	let eventData = {
+		newDoc: null,
+		newContent: null,
+		parentPageChanged: null,
+	};
 
 	function removeOldContent(content) {
 		content.remove();
@@ -42,7 +47,9 @@ export function pageScrollTransition() {
 				updateBrowserState(nextPageUrl);
 
 				// Dispatch custom event when old page is removed
-				const pageSwitched = new CustomEvent('pageSwitched');
+				const pageSwitched = new CustomEvent('pageSwitched', {
+					detail: eventData,
+				});
 				document.dispatchEvent(pageSwitched);
 			},
 		});
@@ -53,26 +60,33 @@ export function pageScrollTransition() {
 			const response = await fetch(url);
 			const html = await response.text();
 			const parser = new DOMParser();
-			const doc = parser.parseFromString(html, 'text/html');
+			const newDoc = parser.parseFromString(html, 'text/html');
 
-			const newContent = doc.querySelector(
-				'[data-scroll-transition="content"]'
-			);
+			const newContent = newDoc.querySelector('[data-scroll-transition="content"]');
 
 			if (!newContent) {
 				throw new Error('Next container not found');
 			}
 
-			newTitle = doc.title;
+			// Set page title var for pageSwitched event handler
+			newTitle = newDoc.title;
+
+			// Compare old and new title elements to determine if title changed
+			const oldTitleElement = document.querySelector('[data-header-nav-transition="main-title"]');
+			const newTitleElement = newDoc.querySelector('[data-header-nav-transition="main-title"]');
+			const parentPageChanged = oldTitleElement?.textContent?.trim() !== newTitleElement?.textContent?.trim();
+
+			// Update event data
+			eventData.newDoc = newDoc;
+			eventData.newContent = newContent;
+			eventData.parentPageChanged = parentPageChanged;
 
 			// Append new content to container
 			transitionContainer.append(newContent);
 
 			// Dispatch event to re-init JS for new elements
 			const pageLoaded = new CustomEvent('pageLoaded', {
-				detail: {
-					container: newContent,
-				},
+				detail: eventData,
 			});
 			document.dispatchEvent(pageLoaded);
 

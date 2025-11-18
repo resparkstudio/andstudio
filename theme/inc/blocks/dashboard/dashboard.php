@@ -24,7 +24,7 @@ $sub_brands = get_field('sub_brands');
                     <?php endif ?>
 
                     <?php if ($banner['description']) : ?>
-                        <div class="andstudio-wysiwyg-container mt-8 text-body-s md:max-w-135">
+                        <div class="andstudio-wysiwyg-container mt-8 text-body-s md:max-w-115">
                             <?php echo wp_kses_post($banner['description']) ?>
                         </div>
                     <?php endif ?>

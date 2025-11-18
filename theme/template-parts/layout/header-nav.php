@@ -28,12 +28,12 @@ if ($ancestors_count === 0) {
 ?>
 
 <div class="hidden md:flex rounded-lg grow min-w-0">
-    <div class="bg-neutral-white px-5 py-4 rounded-lg shrink-0 relative z-10">
-        <?php echo esc_html($main_title) ?>
+    <div class="bg-neutral-white px-5 py-4 rounded-lg shrink-0 z-10 relative">
+        <div data-header-nav-transition="main-title-wrap" class="relative overflow-hidden flex items-center justify-start">
+            <span data-header-nav-transition="main-title" class="whitespace-nowrap"><?php echo esc_html($main_title) ?></span>
+        </div>
     </div>
-    <?php if ($sibling_pages) {
-        get_template_part('template-parts/layout/navigation-swiper', null, array(
-            'sibling_pages' => $sibling_pages
-        ));
-    } ?>
+    <?php get_template_part('template-parts/layout/navigation-swiper', null, array(
+        'sibling_pages' => $sibling_pages
+    )); ?>
 </div>

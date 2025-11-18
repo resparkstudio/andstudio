@@ -18,5 +18,6 @@
 		?>
 	</div><!-- .entry-content -->
 
+	<?php get_template_part('template-parts/layout/navigation-anchor') ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

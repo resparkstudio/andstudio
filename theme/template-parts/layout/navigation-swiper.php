@@ -3,7 +3,7 @@ $sibling_pages = $args['sibling_pages'] ?? false
 ?>
 
 
-<div data-nav-slider="target" class="-ml-1.5 flex grow items-center min-w-0">
+<div data-nav-slider-target="nav" class="-ml-1.5 flex w-full overflow-hidden items-center min-w-0">
     <div data-nav-slider="container" class="flex gap-6 items-center pl-5.5 pr-4 bg-neutral-grey-1 h-full rounded-r-lg min-w-0">
         <button class="swiper-button-prev text-neutral-black">
             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,16 +11,18 @@ $sibling_pages = $args['sibling_pages'] ?? false
             </svg>
         </button>
 
-        <div data-nav-slider="wrap" class="overflow-auto no-scrollbar flex gap-[32px] bg-amber-100">
+        <div data-nav-slider="wrap" class="overflow-auto touch-none no-scrollbar flex gap-[32px]">
 
-            <?php foreach ($sibling_pages as $page) : ?>
-                <a data-nav-link data-nav-slider="item" class="group shrink-0 flex items-center gap-2 text-body-s" href="<?php echo esc_url(get_page_link($page)) ?>">
-                    <div class="hidden group-[.is-current]:block w-1.5 h-1.5 bg-brand-primary rounded-full"></div>
-                    <span class="text-neutral-grey-3 group-[.is-current]:text-neutral-black group-hover:text-neutral-black transition-colors duration-200">
-                        <?php echo esc_html($page->post_title) ?>
-                    </span>
-                </a>
-            <?php endforeach ?>
+            <?php if ($sibling_pages) : ?>
+                <?php foreach ($sibling_pages as $page) : ?>
+                    <a data-nav-slider="item" class="group shrink-0 flex items-center gap-2 text-body-s" href="<?php echo esc_url(get_page_link($page)) ?>">
+                        <div class="hidden group-[.is-current]:block w-1.5 h-1.5 bg-brand-primary rounded-full"></div>
+                        <span class="text-neutral-grey-3 group-[.is-current]:text-neutral-black group-hover:text-neutral-black transition-colors duration-200">
+                            <?php echo esc_html($page->post_title) ?>
+                        </span>
+                    </a>
+                <?php endforeach ?>
+            <?php endif ?>
 
         </div>
 

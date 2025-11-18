@@ -15,16 +15,15 @@ import { ajaxPagePasswordForm, ajaxPageEntryCta } from './modules/ajaxPageIntro'
 import {
 	introAnimation,
 	floatingImagesEffect,
-	menuAnimation,
-	subpageMenuAnimation,
-	activeMenuItemDisplay,
 	heroRevealAnimation,
 	heroScrollAnimation,
 	footerTextFit,
 	footerPin,
 	horizontalScrollGallery,
 } from './modules/animations';
-import { block6Swiper, block13Swiper, block17Swiper, block23Swiper, block26Swiper, navigationSwiper } from './modules/swipers';
+import { menuAnimation, subpageMenuAnimation } from './modules/menu';
+import { block6Swiper, block13Swiper, block17Swiper, block23Swiper, block26Swiper, navigationSwiper, anchorSwiper } from './modules/swipers';
+import { navScrollTransition } from './modules/navScrollTransition';
 
 // These functions will be called again on pageLoaded event (scroll transition)
 function initPageLoaded(container = document.querySelector('[data-scroll-transition="content"]')) {
@@ -44,30 +43,30 @@ function initPageLoaded(container = document.querySelector('[data-scroll-transit
 
 // These functions will be called when previous page is removed (scroll transition)
 function initPageSwitched() {
-	// setActiveNavLink();
+	anchorSwiper();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	initAlpineJS();
 	initPageLoaded();
 	initPageSwitched();
+	initAlpineJS();
 	pageScrollTransition();
+	navScrollTransition();
 	ajaxPagePasswordForm();
 	ajaxPageEntryCta();
 	introAnimation();
 	floatingImagesEffect();
 	menuAnimation();
 	subpageMenuAnimation();
-	activeMenuItemDisplay();
 	heroRevealAnimation();
 	navigationSwiper();
 });
 
 document.addEventListener('pageLoaded', (e) => {
 	// Pass new page's container
-	initPageLoaded(e.detail.container);
+	initPageLoaded(e.detail.newContent);
 });
 
-document.addEventListener('pageSwitched', () => {
+document.addEventListener('pageSwitched', (e) => {
 	initPageSwitched();
 });

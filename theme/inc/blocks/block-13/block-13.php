@@ -39,9 +39,7 @@ andstudio_display_block_preview_img($block)
                 <div class="swiper-wrapper">
                     <?php foreach ($images as $image) : ?>
                         <div class="swiper-slide">
-                            <?php echo wp_get_attachment_image($image['id'], 'full', false, array(
-                                'class' => 'object-cover w-full',
-                            )); ?>
+                            <img class="object-cover w-full" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
                         </div>
                     <?php endforeach ?>
                 </div>
@@ -50,21 +48,21 @@ andstudio_display_block_preview_img($block)
             <!-- Desktop horizontal scroll -->
             <div data-scroll-gallery="track" class="hidden md:block mt-16 relative">
                 <!-- Track -->
-                <div class="h-screen -ml-32 pl-32 overflow-hidden sticky top-0 flex">
-                    <div data-scroll-gallery="wrap" class="h-full flex gap-5 min-h-0">
+                <div class="h-screen -ml-32 pl-32 -mr-32 sticky top-0 flex overflow-hidden">
+                    <div data-scroll-gallery="wrap" class="h-full flex shrink-0 gap-5">
                         <!-- First image -->
                         <img class="h-full shrink-0" src="<?php echo esc_url($first_image['url']) ?>" alt="<?php echo esc_attr($first_image['alt']) ?>">
 
                         <!-- Smaller rows wrap -->
                         <div class="flex flex-col gap-5 shrink-0">
                             <!-- Top row -->
-                            <div class="grow flex gap-5 min-h-0">
+                            <div class="h-1/2 flex gap-5 shrink-0">
                                 <?php foreach ($top_row as $image) : ?>
                                     <img class="h-full shrink-0" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
                                 <?php endforeach ?>
                             </div>
                             <!-- Bottom row -->
-                            <div class="grow flex gap-5 min-h-0">
+                            <div class="h-1/2 flex gap-5 shrink-0">
                                 <?php foreach ($bottom_row as $image) : ?>
                                     <img class="h-full shrink-0" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
                                 <?php endforeach ?>
@@ -76,6 +74,5 @@ andstudio_display_block_preview_img($block)
             </div>
         <?php endif ?>
     </div>
-
 
 </section>

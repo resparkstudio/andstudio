@@ -11,19 +11,46 @@ export class NavigationSwiper {
 		this.prevButton = this.swiperContainer.querySelector('.swiper-button-prev');
 		this.nextButton = this.swiperContainer.querySelector('.swiper-button-next');
 
+		// Target values for animations (used to calculate nav state before animations complete)
+		this.targetScrollPosition = null;
+		this.targetFinalWidth = null;
+
 		this.init();
 	}
 
 	init() {
 		this.initNavButtons();
-		this.adjustWidth(true);
+		this.adjustWidth();
 
 		window.addEventListener('resize', () => {
-			this.adjustWidth();
+			this.scrollToSlide(this.activeIndex);
+
+			if (this.isOverflowing()) {
+				this.showNavButtons();
+			} else if (!this.isOverflowing() && this.swiperSlides.length <= this.visibleCount) {
+				this.hideNavButtons();
+			}
 		});
+
+		// Disable touchpad scrolling
+		this.swiperWrap.addEventListener(
+			'wheel',
+			(e) => {
+				e.preventDefault();
+			},
+			{ passive: false }
+		);
 	}
 
 	initNavButtons() {
+		// Show/Hide nav buttons
+		if (this.swiperSlides.length <= this.visibleCount && !this.isOverflowing()) {
+			this.hideNavButtons();
+		} else {
+			this.showNavButtons();
+		}
+
+		// Add event listeners
 		this.prevButton.addEventListener('click', () => {
 			if (this.activeIndex > 0) {
 				this.activeIndex--;
@@ -33,21 +60,45 @@ export class NavigationSwiper {
 
 		// Only works if last slide not visible yet
 		this.nextButton.addEventListener('click', () => {
-			if (!this.isSlideVisible(this.swiperSlides.length - 1)) {
+			if (!this.isScrollAtEnd()) {
 				this.activeIndex++;
 				this.changeSlide();
 			}
 		});
 	}
 
-	changeSlide() {
-		this.adjustWidth();
+	hideNavButtons() {
+		this.prevButton.classList.add('hidden');
+		this.nextButton.classList.add('hidden');
+		this.prevButton.disabled = true;
+		this.nextButton.disabled = true;
+	}
 
-		this.swiperSlides[this.activeIndex].scrollIntoView({
-			behavior: 'smooth',
-			block: 'nearest',
-			inline: 'start', // This aligns to the left
+	showNavButtons() {
+		this.prevButton.classList.remove('hidden');
+		this.nextButton.classList.remove('hidden');
+		this.prevButton.disabled = false;
+		this.nextButton.disabled = false;
+	}
+
+	changeSlide() {
+		const animationDuration = 0.6;
+
+		// Calculate and store target scroll position
+		this.targetScrollPosition = 0;
+		for (let i = 0; i < this.activeIndex; i++) {
+			this.targetScrollPosition += this.swiperSlides[i].offsetWidth + 32; // Add slide width + gap
+		}
+
+		// Go to scroll position
+		gsap.to(this.swiperWrap, {
+			scrollLeft: this.targetScrollPosition,
+			duration: animationDuration,
+			ease: 'custom',
 		});
+
+		// At the same time adjust width
+		this.adjustWidth(false);
 	}
 
 	adjustWidth(instant = false) {
@@ -59,15 +110,19 @@ export class NavigationSwiper {
 			swiperWidth += this.swiperSlides[i].offsetWidth;
 		}
 
-		// Add spacing between slides
-		swiperWidth += (this.visibleCount - 1) * 32;
+		// Add spacing between slides (additionally adding 2px to width for buffer)
+		swiperWidth += (Math.min(this.visibleCount, this.swiperSlides.length) - 1) * 32 + 2;
 
 		const maxSwiperWidth = this.calculateMaxWidth();
 
-		const finalWidth = Math.min(swiperWidth, maxSwiperWidth);
+		// Store target width
+		this.targetFinalWidth = Math.min(swiperWidth, maxSwiperWidth);
+
+		// Update nav state before the width and scroll animations end since we have final values
+		this.handleNavState();
 
 		gsap.to(this.swiperWrap, {
-			width: finalWidth,
+			width: this.targetFinalWidth,
 			duration: animationDuration,
 			ease: 'custom',
 		});
@@ -83,9 +138,6 @@ export class NavigationSwiper {
 	}
 
 	scrollToSlide(index) {
-		if (this.isSlideVisible(index)) {
-			return;
-		}
 		// Check if slide is before visible area
 		const slide = this.swiperSlides[index];
 
@@ -132,5 +184,35 @@ export class NavigationSwiper {
 		const isVisibleOnRight = slideRect.right <= containerRect.right + 2;
 
 		return isVisibleOnLeft && isVisibleOnRight;
+	}
+
+	isOverflowing() {
+		return this.swiperWrap.scrollWidth > this.calculateMaxWidth();
+	}
+
+	isScrollAtEnd() {
+		// Use target values if set (during animation), otherwise use actual DOM values
+		const scrollLeft = this.targetScrollPosition ?? this.swiperWrap.scrollLeft;
+		const clientWidth = this.targetFinalWidth ?? this.swiperWrap.clientWidth;
+
+		const scrollWidth = this.swiperWrap.scrollWidth;
+		const tolerance = 2;
+
+		return scrollLeft + clientWidth >= scrollWidth - tolerance;
+	}
+
+	handleNavState() {
+		// Handle prev button
+		if (this.activeIndex === 0) {
+			this.prevButton.classList.add('swiper-button-disabled');
+		} else {
+			this.prevButton.classList.remove('swiper-button-disabled');
+		}
+
+		if (this.isScrollAtEnd()) {
+			this.nextButton.classList.add('swiper-button-disabled');
+		} else {
+			this.nextButton.classList.remove('swiper-button-disabled');
+		}
 	}
 }

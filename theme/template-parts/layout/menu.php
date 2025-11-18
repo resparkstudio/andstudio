@@ -32,7 +32,7 @@ $pages = andstudio_get_direct_child_pages($parent_page_id);
         <div data-menu-animation="background" class="absolute -z-10 h-full w-full top-0 left-0 bg-neutral-grey-1 rounded-b-lg md:rounded-xl origin-top-left md:w-0 md:h-0"></div>
 
         <!-- Close button -->
-        <button data-menu-animation="close-btn" class="absolute top-5 right-5 w-10 h-10 flex items-center justify-center bg-neutral-white rounded-full md:left-6 md:top-6">
+        <button data-menu-animation="close-btn" class="absolute top-5 right-5 w-10 h-10 flex items-center justify-center bg-neutral-white rounded-full md:left-6 md:top-6 md:hover:bg-brand-secondary md:transition-colors md:duration-200">
             <svg class="h-3 w-3 text-neutral-black" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11 1L1 11M1 1L11 11" stroke="currentColor" />
             </svg>
@@ -60,7 +60,8 @@ $pages = andstudio_get_direct_child_pages($parent_page_id);
                                 <div class="<?php echo esc_attr($dot_classes) ?>"></div>
                             </a>
                         <?php else : ?>
-                            <button
+                            <a
+                                href="<?php echo esc_url(get_page_link($page->ID)) ?>"
                                 data-menu-animation="nav-link"
                                 data-submenu-animation="trigger"
                                 data-modal-id="<?php echo esc_attr($page->ID) ?>"
@@ -70,7 +71,7 @@ $pages = andstudio_get_direct_child_pages($parent_page_id);
                                 <svg class="w-6 h-6 group-[.is-current]:hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.00049 17.9995L15.0005 11.9995L9.00049 5.99951" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                            </button>
+                            </a>
 
                             <?php get_template_part('template-parts/layout/submenu', null, array('parent_page' => $page)) ?>
                         <?php endif ?>

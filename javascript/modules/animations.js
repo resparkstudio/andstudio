@@ -5,10 +5,7 @@ import textFit from 'textfit';
 
 gsap.registerPlugin(CustomEase);
 gsap.registerPlugin(ScrollTrigger);
-CustomEase.create(
-	'custom',
-	'M0,0 C0.204,0 0.192,0.726 0.318,0.852 0.45,0.984 0.504,1 1,1'
-);
+CustomEase.create('custom', 'M0,0 C0.204,0 0.192,0.726 0.318,0.852 0.45,0.984 0.504,1 1,1');
 CustomEase.create('smooth', '0.5, 0, 0, 1');
 
 export function introAnimation() {
@@ -103,8 +100,7 @@ export function floatingImagesEffect() {
 	const speed = 0.01;
 
 	// Linear interpolation function
-	const lerp = (start, target, amount) =>
-		start * (1 - amount) + target * amount;
+	const lerp = (start, target, amount) => start * (1 - amount) + target * amount;
 
 	// Mouse move handler
 	const manageMouseMove = (e) => {
@@ -152,444 +148,6 @@ export function floatingImagesEffect() {
 	document.body.addEventListener('mousemove', manageMouseMove);
 }
 
-export function menuAnimation() {
-	const modal = document.querySelector('[data-menu-animation="modal"]');
-	if (!modal) return;
-
-	const overlay = modal.querySelector('[data-menu-animation="overlay"]');
-	const openButtons = document.querySelectorAll(
-		'[data-menu-animation="open-btn"]'
-	);
-	const closeButtons = document.querySelectorAll(
-		'[data-menu-animation="close-btn"]'
-	);
-	const background = modal.querySelector(
-		'[data-menu-animation="background"]'
-	);
-	const navLinks = modal.querySelectorAll('[data-menu-animation="nav-link"]');
-	const privacyWrap = modal.querySelector(
-		'[data-menu-animation="privacy-wrap"]'
-	);
-
-	// Define timelines once
-	let openTl = gsap.timeline({ paused: true });
-	let closeTl = gsap.timeline({ paused: true });
-
-	let mm = gsap.matchMedia();
-
-	// Mobile animation
-	mm.add('(max-width: 767px)', () => {
-		openTl
-			.clear()
-			.set(modal, { display: 'block', pointerEvents: 'auto' })
-			.from(background, {
-				width: 0,
-				height: 0,
-				duration: 1.5,
-				ease: 'custom',
-			})
-			.from(overlay, { opacity: 0, duration: 0.3, ease: 'linear' }, '<')
-			.from(
-				navLinks,
-				{
-					opacity: 0,
-					y: 16,
-					duration: 0.5,
-					ease: 'power1.out',
-					stagger: { each: 0.05 },
-				},
-				'<0.4'
-			)
-			.from(
-				privacyWrap,
-				{ opacity: 0, duration: 0.8, ease: 'power1.out' },
-				'<0.3'
-			)
-			.from(
-				closeButtons,
-				{ opacity: 0, scale: 0.5, duration: 0.4, ease: 'power2.out' },
-				'<'
-			);
-
-		closeTl
-			.clear()
-			.set(modal, { pointerEvents: 'none' })
-			.to(background, {
-				width: 0,
-				height: 0,
-				duration: 1,
-				ease: 'custom',
-			})
-			.to(overlay, { opacity: 0, duration: 0.15, ease: 'linear' }, '<')
-			.to(
-				navLinks,
-				{ opacity: 0, duration: 0.2, ease: 'power1.out' },
-				'<'
-			)
-			.to(
-				privacyWrap,
-				{ opacity: 0, duration: 0.2, ease: 'power1.out' },
-				'<'
-			)
-			.to(
-				closeButtons,
-				{ opacity: 0, scale: 0.5, duration: 0.2, ease: 'power2.out' },
-				'<'
-			)
-			.set(modal, { display: 'none' });
-	});
-
-	// Desktop animation
-	mm.add('(min-width: 768px)', () => {
-		openTl
-			.clear()
-			.set(modal, { display: 'grid', pointerEvents: 'auto' })
-			.to(background, {
-				width: '100%',
-				height: '100%',
-				duration: 1.5,
-				ease: 'custom',
-			})
-			.from(overlay, { opacity: 0, duration: 0.3, ease: 'linear' }, '<')
-			.from(
-				closeButtons,
-				{ opacity: 0, scale: 0.5, duration: 0.4, ease: 'power2.out' },
-				'<0.2'
-			)
-			.from(
-				navLinks,
-				{
-					opacity: 0,
-					y: 16,
-					duration: 0.5,
-					ease: 'power1.out',
-					stagger: { each: 0.05 },
-				},
-				'<0.6'
-			)
-			.from(
-				privacyWrap,
-				{ opacity: 0, duration: 0.8, ease: 'power1.out' },
-				'<0.3'
-			);
-
-		closeTl
-			.clear()
-			.set(modal, { pointerEvents: 'none' })
-			.to(background, {
-				width: 0,
-				height: 0,
-				duration: 1,
-				ease: 'custom',
-			})
-			.to(overlay, { opacity: 0, duration: 0.15, ease: 'linear' }, '<')
-			.to(
-				navLinks,
-				{ opacity: 0, duration: 0.2, ease: 'power1.out' },
-				'<'
-			)
-			.to(
-				privacyWrap,
-				{ opacity: 0, duration: 0.2, ease: 'power1.out' },
-				'<'
-			)
-			.to(
-				closeButtons,
-				{ opacity: 0, scale: 0.5, duration: 0.2, ease: 'power2.out' },
-				'<'
-			)
-			.set(modal, { display: 'none' });
-	});
-
-	function openMenu() {
-		if (closeTl.isActive()) closeTl.kill();
-		openTl.restart();
-	}
-
-	function closeMenu() {
-		if (openTl.isActive()) openTl.kill();
-		closeTl.restart();
-	}
-
-	openButtons.forEach((button) => {
-		button.addEventListener('click', openMenu);
-	});
-	closeButtons.forEach((button) => {
-		button.addEventListener('click', closeMenu);
-	});
-	overlay.addEventListener('click', closeMenu);
-}
-
-export function subpageMenuAnimation() {
-	const subpageContainers = document.querySelectorAll(
-		'[data-submenu-animation="container"]'
-	);
-	const subpageTriggers = document.querySelectorAll(
-		'[data-submenu-animation="trigger"]'
-	);
-
-	if (!subpageContainers.length || !subpageTriggers.length) return;
-
-	const modalCloseEvent = new Event('subpageModalClose');
-	const desktopBackground = document.querySelector(
-		'[data-submenu-animation="desktop-background"]'
-	);
-	const closeButtons = document.querySelectorAll(
-		'[data-menu-animation="close-btn"]'
-	);
-
-	let openModalId;
-	let modalAnimationFunctions = {};
-
-	subpageContainers.forEach((container) => {
-		const triggerId = container.dataset.modalParentId;
-		const modal = container.querySelector(
-			'[data-submenu-animation="modal"]'
-		);
-		const overlay = container.querySelector(
-			'[data-submenu-animation="overlay"]'
-		);
-		const closeBtn = container.querySelector(
-			'[data-submenu-animation="close-btn"]'
-		);
-		const subpageLinks = container.querySelectorAll(
-			'[data-submenu-animation="link"]'
-		);
-
-		let mm = gsap.matchMedia();
-
-		// Each modal gets its own master timeline
-		let masterTl = gsap.timeline({ paused: true });
-
-		// Mobile animation
-		mm.add('(max-width: 767px)', () => {
-			function showSubmenu() {
-				// Remove previous animations
-				masterTl.clear();
-
-				masterTl
-					.set(container, {
-						pointerEvents: 'auto',
-						display: 'flex',
-					})
-					.to(modal, {
-						y: '0%',
-						duration: 1,
-						ease: 'custom',
-					})
-					.to(
-						overlay,
-						{
-							opacity: 0.3,
-							duration: 0.3,
-							ease: 'linear',
-						},
-						'<'
-					);
-
-				masterTl.restart();
-			}
-
-			function closeSubmenu() {
-				// Dispatch event for activeLink function
-				document.dispatchEvent(modalCloseEvent);
-
-				// Remove previous animations
-				masterTl.clear();
-
-				masterTl
-					.set(container, {
-						pointerEvents: 'none',
-					})
-					.to(modal, {
-						y: '100%',
-						duration: 0.8,
-						ease: 'custom',
-					})
-					.to(
-						overlay,
-						{
-							opacity: 0,
-							duration: 0.15,
-							ease: 'linear',
-						},
-						'<'
-					)
-					.set(container, {
-						display: 'none',
-					});
-
-				masterTl.restart();
-			}
-
-			modalAnimationFunctions[triggerId] = { showSubmenu, closeSubmenu };
-
-			overlay.addEventListener('click', closeSubmenu);
-			closeBtn.addEventListener('click', closeSubmenu);
-
-			return () => {
-				// Clear animations storage
-				modalAnimationFunctions = {};
-			};
-		});
-
-		// Desktop animation
-		mm.add('(min-width: 768px)', () => {
-			function showSubmenu() {
-				// Remove previous animations
-				masterTl.clear();
-
-				masterTl
-					.set(container, {
-						pointerEvents: 'auto',
-						display: 'flex',
-					})
-					.to(desktopBackground, {
-						width: '100%',
-						height: '100%',
-						duration: 1.5,
-						ease: 'custom',
-					})
-					.to(
-						modal,
-						{
-							opacity: 1,
-							ease: 'power2.out',
-							duration: 0.3,
-						},
-						'<0.6'
-					)
-					.from(
-						subpageLinks,
-						{
-							clipPath: 'inset(50% 20% 0% 20% round 20px)',
-							duration: 0.3,
-							ease: 'power2.out',
-						},
-						'<'
-					);
-
-				masterTl.restart();
-			}
-
-			function closeSubmenu() {
-				// Dispatch event for activeLink function
-				document.dispatchEvent(modalCloseEvent);
-				// Remove previous animations
-				masterTl.clear();
-
-				masterTl
-					.set(container, {
-						pointerEvents: 'none',
-					})
-					.to(modal, {
-						opacity: 0,
-						ease: 'linear',
-						duration: 0.1,
-					})
-					.set(container, {
-						display: 'none',
-					});
-
-				masterTl.restart();
-			}
-
-			modalAnimationFunctions[triggerId] = { showSubmenu, closeSubmenu };
-
-			closeBtn.addEventListener('click', closeSubmenu);
-
-			return () => {
-				// Clear animations storage
-				modalAnimationFunctions = {};
-			};
-		});
-	});
-
-	subpageTriggers.forEach((trigger) => {
-		const modalId = trigger.dataset.modalId;
-		const { showSubmenu } = modalAnimationFunctions[modalId];
-
-		trigger.addEventListener('click', () => {
-			// Hide previously visible subpage content
-			if (openModalId) {
-				const { closeSubmenu } = modalAnimationFunctions[openModalId];
-				closeSubmenu();
-			}
-			showSubmenu();
-			openModalId = modalId;
-		});
-	});
-
-	closeButtons.forEach((button) => {
-		button.addEventListener('click', () => {
-			if (openModalId) {
-				const { closeSubmenu } = modalAnimationFunctions[openModalId];
-				closeSubmenu();
-				gsap.set(desktopBackground, {
-					width: desktopBackground.offsetWidth, // Lock current width
-					justifySelf: 'end',
-				});
-				gsap.to(desktopBackground, {
-					width: 0,
-					height: 0,
-					duration: 1,
-					ease: 'custom',
-					onComplete: () => {
-						gsap.set(desktopBackground, {
-							justifySelf: 'start',
-						});
-					},
-				});
-			}
-		});
-	});
-}
-
-// Kai atidaromas main menu if submenu parent active - showSubmenu()
-export function activeMenuItemDisplay() {
-	let currentPageLink;
-	let activeLink;
-
-	const navLinks = document.querySelectorAll(
-		'[data-menu-animation="nav-link"]'
-	);
-
-	function toggleActiveLink(link) {
-		if (link !== currentPageLink) {
-			if (currentPageLink) {
-				currentPageLink.classList.remove('is-current');
-			}
-			link.classList.add('is-current');
-			activeLink = link;
-		}
-	}
-
-	function resetActiveLink() {
-		if (currentPageLink) {
-			currentPageLink.classList.add('is-current');
-		}
-		if (activeLink) {
-			activeLink.classList.remove('is-current');
-			activeLink = null;
-		}
-	}
-
-	// 1. Get active page link for later
-	navLinks.forEach((link) => {
-		if (link.classList.contains('is-current')) {
-			currentPageLink = link;
-		}
-	});
-
-	navLinks.forEach((link) => {
-		link.addEventListener('click', () => {
-			toggleActiveLink(link);
-		});
-	});
-
-	document.addEventListener('subpageModalClose', resetActiveLink);
-}
-
 export function heroRevealAnimation() {
 	const header = document.querySelector('[data-hero-reveal="header"]');
 
@@ -635,16 +193,12 @@ export function heroRevealAnimation() {
 }
 
 export function heroScrollAnimation(container) {
-	const heroSection = container.querySelector(
-		'[data-hero-scroll="hero-section"]'
-	);
+	const heroSection = container.querySelector('[data-hero-scroll="hero-section"]');
 
 	if (!heroSection) return;
 
 	const heroImg = container.querySelector('[data-hero-reveal="image"]');
-	const contentWrap = container.querySelector(
-		'[data-hero-scroll="content-wrap"]'
-	);
+	const contentWrap = container.querySelector('[data-hero-scroll="content-wrap"]');
 
 	let mm = gsap.matchMedia();
 
@@ -715,9 +269,7 @@ export function footerPin(container) {
 
 	if (!footer) return;
 
-	const parallaxFooterEl = footer.querySelector(
-		'[data-scroll-transition="parallax-footer"]'
-	);
+	const parallaxFooterEl = footer.querySelector('[data-scroll-transition="parallax-footer"]');
 
 	let tl = gsap.timeline({
 		scrollTrigger: {
@@ -736,27 +288,8 @@ export function footerPin(container) {
 	});
 }
 
-export function setActiveNavLink() {
-	const navLinks = document.querySelectorAll('[data-nav-link]');
-
-	if (!navLinks.length) return;
-
-	navLinks.forEach((link) => {
-		if (link.href === window.location.href) {
-			link.classList.add('is-current');
-		} else {
-			link.classList.remove('is-current');
-		}
-	});
-
-	const activeNavChanged = new CustomEvent('activeNavChanged');
-	document.dispatchEvent(activeNavChanged);
-}
-
 export function horizontalScrollGallery(container) {
-	const scrollTracks = container.querySelectorAll(
-		'[data-scroll-gallery="track"]'
-	);
+	const scrollTracks = container.querySelectorAll('[data-scroll-gallery="track"]');
 
 	if (!scrollTracks) return;
 
