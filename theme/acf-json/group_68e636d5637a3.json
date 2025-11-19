@@ -1,0 +1,103 @@
+{
+    "key": "group_68e636d5637a3",
+    "title": "All blocks",
+    "fields": [
+        {
+            "key": "field_68e636d5f9713",
+            "label": "Anchor Title",
+            "name": "anchor_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "This text will be displayed at the bottom anchor navigation",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68e7a04edddcd",
+            "label": "Boxed",
+            "name": "boxed",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "all"
+            },
+            {
+                "param": "block",
+                "operator": "!=",
+                "value": "andstudio\/page-transition"
+            },
+            {
+                "param": "block",
+                "operator": "!=",
+                "value": "andstudio\/content-wrap"
+            },
+            {
+                "param": "block",
+                "operator": "!=",
+                "value": "andstudio\/hero"
+            },
+            {
+                "param": "block",
+                "operator": "!=",
+                "value": "andstudio\/faq"
+            },
+            {
+                "param": "block",
+                "operator": "!=",
+                "value": "andstudio\/dashboard"
+            },
+            {
+                "param": "block",
+                "operator": "!=",
+                "value": "andstudio\/contact"
+            },
+            {
+                "param": "block",
+                "operator": "!=",
+                "value": "andstudio\/page-end"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1763559795
+}
