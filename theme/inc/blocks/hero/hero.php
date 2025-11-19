@@ -14,7 +14,7 @@ $banner_width_class = $is_full_width ? 'md:w-full' : '';
 <?php if ($image) : ?>
     <div class="hero-block_image w-full aspect-[393/264] md:sticky md:top-0 md:aspect-[1440/720] md:w-full md:h-full md:overflow-hidden">
         <?php echo wp_get_attachment_image($image['id'], 'full', false, array(
-            'class' => 'object-cover w-full h-full',
+            'class' => 'object-cover w-full h-full will-change-transform',
             'data-hero-reveal' => 'image'
         )); ?>
     </div>

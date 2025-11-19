@@ -19,9 +19,15 @@ export function pageScrollTransition() {
 
 	function removeOldContent(content) {
 		content.remove();
+		window.lenis.scrollTo(0, {
+			immediate: true,
+			lock: true,
+			force: true,
+		});
+
 		setTimeout(() => {
 			ScrollTrigger.refresh();
-		}, 0);
+		}, 20);
 	}
 
 	function updateBrowserState(nextPageUrl) {

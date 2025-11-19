@@ -37,7 +37,9 @@ andstudio_display_block_preview_img($block);
                                 $hex_color = Hex::fromString($color['color']);
                                 $rgb_color = $hex_color->toRgb();
                                 $cmyk_color = $hex_color->toCmyk();
-                                $is_white = $color['color'] === '#ffffff'; ?>
+                                $is_white = $color['color'] === '#ffffff';
+                                $pantone_color = $color['pantone_code']
+                            ?>
                                 <div class="flex gap-5 md:gap-6">
                                     <div style="background-color: <?php echo esc_attr($color['color']) ?>;" class="w-full aspect-square rounded-lg md:rounded-xl md:aspect-[282/144] md:w-2/3"></div>
                                     <div class="w-full flex flex-col pt-2.5 text-body-s md:pt-4 md:w-1/3 md:min-w-42.25">
@@ -71,6 +73,10 @@ andstudio_display_block_preview_img($block);
                                                                 round($cmyk_color->yellow() * 100) . ', ' .
                                                                 round($cmyk_color->key() * 100) . ''
                                                         ) ?></span>
+                                        <?php endif ?>
+
+                                        <?php if ($pantone_color) : ?>
+                                            <span>Pantone: <?php echo esc_html($pantone_color) ?></span>
                                         <?php endif ?>
                                     </div>
                                 </div>

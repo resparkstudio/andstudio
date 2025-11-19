@@ -52,6 +52,7 @@ andstudio_display_block_preview_img($block);
                             $rgb_color = $hex_color->toRgb();
                             $cmyk_color = $hex_color->toCmyk();
                             $is_white = $item['color'] === '#ffffff';
+                            $pantone_color = $item['pantone_code']
                         ?>
 
                             <div class="w-full pt-6 border-t border-neutral-grey-2 first:pt-0 first:border-t-0 md:pt-0 md:border-t-0 md:col-span-1">
@@ -90,6 +91,10 @@ andstudio_display_block_preview_img($block);
                                                             round($cmyk_color->yellow() * 100) . '%, ' .
                                                             round($cmyk_color->key() * 100) . '%'
                                                     ) ?></span>
+                                    <?php endif ?>
+
+                                    <?php if ($pantone_color) : ?>
+                                        <span>Pantone: <?php echo esc_html($pantone_color) ?></span>
                                     <?php endif ?>
                                 </div>
                             </div>

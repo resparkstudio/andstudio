@@ -49,7 +49,7 @@ andstudio_display_block_preview_img($block)
             <div data-scroll-gallery="track" class="hidden md:block mt-16 relative">
                 <!-- Track -->
                 <div class="h-screen -ml-32 pl-32 -mr-32 sticky top-0 flex overflow-hidden">
-                    <div data-scroll-gallery="wrap" class="h-full flex shrink-0 gap-5">
+                    <div data-scroll-gallery="wrap" class="h-full flex shrink-0 gap-5 will-change-transform">
                         <!-- First image -->
                         <img class="h-full shrink-0" src="<?php echo esc_url($first_image['url']) ?>" alt="<?php echo esc_attr($first_image['alt']) ?>">
 

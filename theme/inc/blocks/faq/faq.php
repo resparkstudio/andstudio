@@ -1,8 +1,12 @@
 <?php
-$title = get_field('title');
 $image = get_field('image');
 $mobile_image = get_field('mobile_image');
-$faq_groups = get_field('faq_groups', 'option');
+$title = get_field('title');
+
+$language_setting = get_field('language');
+$language_group = get_field('faq_' . $language_setting, 'option');
+$faq_groups = $language_group['faq_groups'];
+
 ?>
 
 <section class="bg-neutral-grey-1 pb-12 md:pb-23" x-data='{"expanded": null}'>

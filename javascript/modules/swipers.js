@@ -155,7 +155,7 @@ export function navigationSwiper() {
 
 		if (!navSwiper.swiperSlides.length) {
 			gsap.to(navSwiper.target, {
-				x: -32,
+				x: '-2rem',
 				duration: 0.3,
 				ease: 'smooth',
 			});

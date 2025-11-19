@@ -9,7 +9,7 @@
 }
 
 [data-swiper="block-17"] .swiper-slide .block-17_img-wrap {
-	@apply origin-top transition-all duration-600;
+	@apply origin-top transition-all duration-600 will-change-transform;
 }
 
 [data-swiper="block-17"] .swiper-slide.swiper-slide-next .block-17_img-wrap {

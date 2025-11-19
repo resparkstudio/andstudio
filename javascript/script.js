@@ -10,6 +10,7 @@
  */
 
 import { initAlpineJS } from './modules/alpine';
+import { smoothScroll } from './modules/smoothScroll';
 import { pageScrollTransition } from './modules/pageScrollTransition';
 import { ajaxPagePasswordForm, ajaxPageEntryCta } from './modules/ajaxPageIntro';
 import {
@@ -47,6 +48,7 @@ function initPageSwitched() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+	smoothScroll();
 	initPageLoaded();
 	initPageSwitched();
 	initAlpineJS();
