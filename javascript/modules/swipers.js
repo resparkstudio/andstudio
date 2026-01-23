@@ -65,6 +65,7 @@ export function block13Swiper(container) {
 }
 
 export function block17Swiper(container) {
+	alert('testas');
 	const swiperTargets = container.querySelectorAll('[data-swiper="block-17"]');
 
 	if (!swiperTargets.length) return;
@@ -78,7 +79,7 @@ export function block17Swiper(container) {
 			centeredSlides: true,
 			loop: true,
 			autoplay: {
-				delay: 3000,
+				delay: 3100,
 			},
 			spaceBetween: 12,
 			speed: 800,
