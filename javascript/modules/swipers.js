@@ -65,7 +65,6 @@ export function block13Swiper(container) {
 }
 
 export function block17Swiper(container) {
-	alert('testas');
 	const swiperTargets = container.querySelectorAll('[data-swiper="block-17"]');
 
 	if (!swiperTargets.length) return;
