@@ -28,7 +28,7 @@ $mobile_rows_overflow = array_slice($sub_pages, 6);
     <div data-submenu-animation="modal" class="<?php echo esc_attr($mobile_modal_height) ?> translate-y-full w-full bg-neutral-grey-1 rounded-t-lg relative bottom-0 z-20 px-5 pt-5 pb-6 flex flex-col md:translate-0 md:rounded-xl md:h-full md:p-6 md:bg-transparent md:opacity-0">
         <button data-submenu-animation="close-btn" class="block mb-2.5 h-1.5 w-41 bg-neutral-grey-2 rounded-xs mx-auto md:hidden"></button>
         <!-- Mobile -->
-        <div class="h-full w-full overflow-y-scroll md:hidden">
+        <div data-lenis-prevent class="h-full w-full overflow-y-scroll md:hidden">
             <?php if ($mobile_rows_visible) : ?>
                 <!-- Visible part -->
                 <div class="flex flex-col h-full gap-2.5">
@@ -49,7 +49,7 @@ $mobile_rows_overflow = array_slice($sub_pages, 6);
 
         <!-- Desktop -->
         <?php if ($desktop_rows) : ?>
-            <div class="hidden md:grid [grid-auto-rows:calc((100%_-_0.75rem)/3)] md:grid-cols-1 md:gap-1.5 md:h-full md:overflow-y-scroll">
+            <div data-lenis-prevent class="hidden md:grid [grid-auto-rows:calc((100%_-_0.75rem)/3)] md:grid-cols-1 md:gap-1.5 md:h-full md:overflow-y-scroll">
                 <?php foreach ($desktop_rows as $row) :
                 ?>
                     <div class="flex w-full gap-1.5">
