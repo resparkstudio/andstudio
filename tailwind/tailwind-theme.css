@@ -26,7 +26,10 @@
 
 	/* Brand colors are set from the page settings. These are just fallback values */
 	--color-brand-primary: #000000;
+	--color-text-primary: #ffffff;
+
 	--color-brand-secondary: #f2f2f2;
+	--color-text-secondary: #000000;
 
 	/* Typography - Font Families */
 	--font-primary: "Neue-grotesk-display-pro", Arial, sans-serif;

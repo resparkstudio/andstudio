@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-11",
-	"title": "block-11",
-	"description": "block-11 block",
+	"title": "Image Grid with Captions",
+	"description": "Two-column image grid with description text below each",
 	"style": ["file:./block-11.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-11"],
+	"keywords": ["andstudio", "image", "grid", "captions"],
 	"acf": {
 		"renderTemplate": "block-11.php",
 		"blockVersion": 3

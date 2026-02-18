@@ -40,9 +40,9 @@
             "message": "",
             "default_value": 0,
             "allow_in_bindings": 0,
-            "ui": 0,
             "ui_on_text": "",
-            "ui_off_text": ""
+            "ui_off_text": "",
+            "ui": 1
         }
     ],
     "location": [
@@ -99,5 +99,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763559795
+    "modified": 1771238526
 }

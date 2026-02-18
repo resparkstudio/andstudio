@@ -22,7 +22,7 @@ andstudio_display_block_preview_img($block);
                         $description = $item['description'];
                     ?>
                         <div class="swiper-slide h-auto md:col-span-1">
-                            <div class="bg-brand-secondary h-full rounded-lg py-8 px-5 md:px-8 md:py-15 md:rounded-xl">
+                            <div class="bg-brand-secondary text-text-secondary h-full rounded-lg py-8 px-5 md:px-8 md:py-15 md:rounded-xl">
                                 <?php if ($title) : ?>
                                     <h3 class="text-body-m md:text-h3"><?php echo esc_html($title) ?></h3>
                                 <?php endif ?>

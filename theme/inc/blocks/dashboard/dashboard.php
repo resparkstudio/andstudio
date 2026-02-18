@@ -31,7 +31,7 @@ $sub_brands = get_field('sub_brands');
                 </div>
 
                 <?php if ($banner['download_link']) : ?>
-                    <div class="mt-8 p-5 rounded-lg bg-brand-primary md:mt-0 md:flex md:flex-col md:justify-between md:min-w-[20.25rem] md:rounded-xl">
+                    <div class="mt-8 p-5 rounded-lg bg-brand-primary text-text-primary md:mt-0 md:flex md:flex-col md:justify-between md:min-w-[20.25rem] md:rounded-xl">
                         <div>
                             <?php if ($banner['download_title']) : ?>
                                 <h2 class="text-body-m text-neutral-white md:text-h3"><?php echo esc_html($banner['download_title']) ?></h2>
@@ -62,7 +62,7 @@ $sub_brands = get_field('sub_brands');
         <?php if ($pages) : ?>
             <div class="mt-10 flex flex-col gap-2.5 md:mt-16 md:grid md:grid-cols-2 md:gap-5">
                 <?php foreach ($pages as $page) : ?>
-                    <div class="group relative p-5 flex justify-between items-center rounded-lg bg-neutral-white md:py-8 md:pl-6 md:pr-14 md:rounded-xl md:hover:bg-brand-primary md:hover:text-neutral-white md:transition-colors md:duration-200 md:flex-col md:items-start md:gap-4">
+                    <div class="group relative p-5 flex justify-between items-center rounded-lg bg-neutral-white md:py-8 md:pl-6 md:pr-14 md:rounded-xl md:hover:bg-brand-primary md:hover:text-text-primary md:transition-colors md:duration-200 md:flex-col md:items-start md:gap-4">
                         <?php if ($page['link']) : ?>
                             <a class="absolute inset-0 z-10" href="<?php echo esc_url($page['link']) ?>"></a>
                         <?php endif ?>
@@ -115,12 +115,16 @@ $sub_brands = get_field('sub_brands');
                     <div class="flex flex-col gap-2.5 md:grid md:grid-cols-2 md:gap-5">
                         <?php foreach ($sub_brands['brands'] as $brand) :
                             $page_id = $brand['page'];
-                            $primary_color = get_field('brand_primary_color', $page_id);
-                            $secondary_color = get_field('brand_secondary_color', $page_id);
+                            $primary_colors = get_field('primary_colors', $page_id);
+                            $secondary_colors = get_field('secondary_colors', $page_id);
+                            $primary_brand = $primary_colors['brand'] ?? '#000000';
+                            $primary_text = $primary_colors['text'] ?? '#ffffff';
+                            $secondary_brand = $secondary_colors['brand'] ?? '#B4B4B4';
+                            $secondary_text = $secondary_colors['text'] ?? '#000000';
                         ?>
-                            <a class="relative rounded-xl p-5 bg-brand-primary text-neutral-white flex flex-col gap-5 md:p-10 md:justify-between md:gap-12 md:hover:bg-brand-secondary md:hover:text-neutral-black md:transition-colors md:duration-200"
+                            <a class="relative rounded-xl p-5 bg-brand-primary text-text-primary flex flex-col gap-5 md:p-10 md:justify-between md:gap-12 md:hover:bg-brand-secondary md:hover:text-text-secondary md:transition-colors md:duration-200"
                                 href="<?php echo esc_url(get_permalink($page_id)) ?>"
-                                style="--color-brand-primary: <?php echo esc_attr($primary_color); ?>; --color-brand-secondary: <?php echo esc_attr($secondary_color); ?>;">
+                                style="--color-brand-primary: <?php echo esc_attr($primary_brand); ?>; --color-text-primary: <?php echo esc_attr($primary_text); ?>; --color-brand-secondary: <?php echo esc_attr($secondary_brand); ?>; --color-text-secondary: <?php echo esc_attr($secondary_text); ?>;">
                                 <?php if ($brand['title']) : ?>
                                     <h3 class="text-body-m md:hidden"><?php echo esc_html($brand['title']) ?></h3>
                                 <?php endif ?>

@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-3",
-	"title": "block-3",
-	"description": "block-3 block",
+	"title": "Text & Image Split",
+	"description": "Two-column layout with text left and image right",
 	"style": ["file:./block-3.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-3"],
+	"keywords": ["andstudio", "text", "image", "split", "two-column"],
 	"acf": {
 		"renderTemplate": "block-3.php",
 		"blockVersion": 3

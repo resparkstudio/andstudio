@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-7",
-	"title": "block-7",
-	"description": "block-7 block",
+	"title": "Text & Image with CTA",
+	"description": "Text block with small accent image and call-to-action link",
 	"style": ["file:./block-7.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-7"],
+	"keywords": ["andstudio", "text", "image", "cta", "link"],
 	"acf": {
 		"renderTemplate": "block-7.php",
 		"blockVersion": 3

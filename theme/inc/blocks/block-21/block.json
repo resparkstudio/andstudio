@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-21",
-	"title": "block-21",
-	"description": "block-21 block",
+	"title": "Content Rows (Split Images)",
+	"description": "Content rows with separate desktop and mobile images",
 	"style": ["file:./block-21.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-21"],
+	"keywords": ["andstudio", "content", "rows", "split", "images"],
 	"acf": {
 		"renderTemplate": "block-21.php",
 		"blockVersion": 3

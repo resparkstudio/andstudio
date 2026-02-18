@@ -24,7 +24,7 @@ $links = get_field('links');
         <?php if ($links) : ?>
             <div class="flex flex-col gap-5 mt-5 md:grid md:grid-cols-2">
                 <?php foreach ($links as $link) : ?>
-                    <a class="p-5 text-body-m bg-neutral-white text-neutral-black rounded-xl flex justify-between group transition-all duration-200 md:hover:bg-brand-primary md:hover:text-neutral-white md:text-h3" href="<?php echo esc_url($link['link']) ?>">
+                    <a class="p-5 text-body-m bg-neutral-white text-neutral-black rounded-xl flex justify-between group transition-all duration-200 md:hover:bg-brand-primary md:hover:text-text-primary md:text-h3" href="<?php echo esc_url($link['link']) ?>">
                         <?php echo esc_html($link['text']) ?>
                         <div class="w-6 h-6 bg-neutral-grey-1 flex items-center justify-center rounded-full transition-all duration-200 md:group-hover:bg-neutral-white md:w-8 md:h-8">
                             <svg class="w-1.5 h-1.5 transition-all duration-200 md:group-hover:text-brand-primary md:w-2 md:h-2" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">

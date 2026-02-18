@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-8",
-	"title": "block-8",
-	"description": "block-8 block",
+	"title": "Text Section",
+	"description": "Simple centered subtitle, title, and body text",
 	"style": ["file:./block-8.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-8"],
+	"keywords": ["andstudio", "text", "centered", "simple"],
 	"acf": {
 		"renderTemplate": "block-8.php",
 		"blockVersion": 3

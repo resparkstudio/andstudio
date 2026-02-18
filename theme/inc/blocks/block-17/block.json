@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-17",
-	"title": "block-17",
-	"description": "block-17 block",
+	"title": "Tabbed Image Slider",
+	"description": "Tab switcher with swiper image carousel per tab",
 	"style": ["file:./block-17.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-17"],
+	"keywords": ["andstudio", "tabs", "slider", "carousel"],
 	"acf": {
 		"renderTemplate": "block-17.php",
 		"blockVersion": 3

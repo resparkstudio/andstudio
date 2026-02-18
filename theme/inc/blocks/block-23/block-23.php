@@ -41,7 +41,7 @@ andstudio_display_block_preview_img($block);
 
                                     <?php if ($item['button']) :
                                         $target_attr = $item['button']['target'] ? $item['button']['target'] : '_self'; ?>
-                                        <a class="text-body-s text-center bg-brand-primary text-neutral-white rounded-lg p-5 md:hover:bg-brand-secondary md:hover:text-neutral-black md:transition-colors duration-200" href="<?php echo esc_url($item['button']['url']) ?>" target="<?php echo esc_attr($target_attr) ?>"><?php echo esc_html($item['button']['title']) ?></a>
+                                        <a class="text-body-s text-center bg-brand-primary text-text-primary rounded-lg p-5 md:hover:bg-brand-secondary md:hover:text-text-secondary md:transition-colors duration-200" href="<?php echo esc_url($item['button']['url']) ?>" target="<?php echo esc_attr($target_attr) ?>"><?php echo esc_html($item['button']['title']) ?></a>
                                     <?php endif ?>
                                 </div>
                             <?php endif ?>
@@ -76,7 +76,7 @@ andstudio_display_block_preview_img($block);
 
                                 <?php if ($item['button']) :
                                     $target_attr = $item['button']['target'] ? $item['button']['target'] : '_self'; ?>
-                                    <a class="text-body-xs text-center bg-brand-primary text-neutral-white rounded-lg px-5 py-3.5 md:hover:bg-brand-secondary md:hover:text-neutral-black md:transition-colors duration-200" href="<?php echo esc_url($item['button']['url']) ?>" target="<?php echo esc_attr($target_attr) ?>"><?php echo esc_html($item['button']['title']) ?></a>
+                                    <a class="text-body-xs text-center bg-brand-primary text-text-primary rounded-lg px-5 py-3.5 md:hover:bg-brand-secondary md:hover:text-text-secondary md:transition-colors duration-200" href="<?php echo esc_url($item['button']['url']) ?>" target="<?php echo esc_attr($target_attr) ?>"><?php echo esc_html($item['button']['title']) ?></a>
                                 <?php endif ?>
                             </div>
                         <?php endif ?>

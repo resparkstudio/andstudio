@@ -39,8 +39,8 @@
             },
             "default_value": "",
             "allow_in_bindings": 0,
-            "tabs": "all",
-            "toolbar": "full",
+            "tabs": "visual",
+            "toolbar": "basic",
             "media_upload": 1,
             "delay": 0
         },
@@ -121,7 +121,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "layout": "table",
+                    "layout": "block",
                     "min": 0,
                     "max": 0,
                     "collapsed": "",
@@ -222,6 +222,72 @@
                             "layout": "vertical",
                             "save_other_choice": 0,
                             "parent_repeater": "field_68fcc2a966fb0"
+                        },
+                        {
+                            "key": "field_6992dc790c2ad",
+                            "label": "CMYK Override",
+                            "name": "cmyk_override",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Optional: use to override automatically generated value",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_68fcc2a966fb0"
+                        },
+                        {
+                            "key": "field_6992dcac0c2ae",
+                            "label": "RGB Override",
+                            "name": "rgb_override",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Optional: use to override automatically generated value",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_68fcc2a966fb0"
+                        },
+                        {
+                            "key": "field_6992f1e13344e",
+                            "label": "Additional Info",
+                            "name": "additional_info",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Use for extra info like RAL or anything else.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_68fcc2a966fb0"
                         }
                     ],
                     "parent_repeater": "field_68fcb88316ef1"
@@ -248,5 +314,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763559795
+    "modified": 1771237881
 }

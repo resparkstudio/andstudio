@@ -5,25 +5,34 @@
  */
 
 $sub_page = $args['sub_page'] ?? null;
-$mobile_align_class = ($args['top_align'] ?? false) ? 'items-start' : 'items-center';
 
 if (!$sub_page) return;
+
+$size = $args['mobile_size'] ?? 'small';
 
 $page_url = get_page_link($sub_page->ID);
 $thumbnail_url = get_the_post_thumbnail_url($sub_page);
 $text_color = $thumbnail_url ? 'text-neutral-white' : 'text-neutral-black';
+$link_classes = match ($size) {
+    'small' => 'h-18 md:h-full',
+    'medium' => 'h-32 md:h-full',
+    'large' => 'h-50 md:h-full',
+};
+$contain_menu_image = get_field('contain_menu_image', $sub_page->ID);
+
+$image_classes = match ($contain_menu_image) {
+    true => 'object-contain p-10',
+    default => 'object-cover'
+};
 ?>
 
-<a
-    href="<?php echo esc_url($page_url) ?>"
-    data-submenu-animation="link"
-    class="<?php echo esc_attr($mobile_align_class) ?> group w-full h-full bg-brand-secondary md:hover:bg-brand-primary transition-colors duration-300 rounded-xl p-5 text-body-m flex justify-between relative overflow-hidden md:p-4 md:pl-6 md:flex-col md:items-start">
+<a href="<?php echo esc_url($page_url) ?>" data-submenu-animation="link" class="<?php echo esc_attr($link_classes) ?> group w-full bg-brand-secondary md:hover:bg-brand-primary transition-colors duration-300 rounded-xl p-5 text-body-m flex justify-between relative overflow-hidden md:p-4 md:pl-6 md:flex-col md:items-start">
 
     <?php if ($thumbnail_url) : ?>
         <img
             src="<?php echo esc_url($thumbnail_url) ?>"
             alt=""
-            class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 md:group-hover:scale-105" />
+            class="absolute inset-0 w-full h-full transition-transform duration-300 md:group-hover:scale-105 <?php echo esc_attr($image_classes) ?>" />
     <?php endif ?>
 
     <h3 class="<?php echo esc_attr($text_color) ?> text-body-m text-start md:group-hover:text-neutral-white transition-colors duration-300 relative z-10"><?php echo esc_html($sub_page->post_title) ?></h3>

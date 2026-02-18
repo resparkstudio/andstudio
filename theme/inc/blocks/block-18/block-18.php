@@ -27,7 +27,7 @@ andstudio_display_block_preview_img($block);
             <div class="mt-6 flex flex-col md:mt-8 md:flex-row md:items-center md:gap-6">
                 <?php if ($button) :
                     $target_attr = $button['target'] ? $button['target'] : '_self'; ?>
-                    <a class="text-body-s text-center bg-brand-primary text-neutral-white rounded-lg p-5 md:hover:bg-brand-secondary md:hover:text-neutral-black md:transition-colors duration-200" href="<?php echo esc_url($button['url']) ?>" target="<?php echo esc_attr($target_attr) ?>"><?php echo esc_html($button['title']) ?></a>
+                    <a class="text-body-s text-center bg-brand-primary text-text-primary rounded-lg p-5 md:hover:bg-brand-secondary md:hover:text-text-secondary md:transition-colors duration-200" href="<?php echo esc_url($button['url']) ?>" target="<?php echo esc_attr($target_attr) ?>"><?php echo esc_html($button['title']) ?></a>
                 <?php endif ?>
 
                 <?php if ($link) :

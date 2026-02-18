@@ -240,13 +240,22 @@ function andstudio_set_brand_colors() {
 	// If no brand found, exit early
 	if (!$parent_brand_id) return;
 
-	$primary_color   = get_field('brand_primary_color', $parent_brand_id) ?: '#000000';
-	$secondary_color = get_field('brand_secondary_color', $parent_brand_id) ?: '#f2f2f2';
+	$primary_colors = get_field('primary_colors', $parent_brand_id) ?? null;
+	$secondary_colors = get_field('secondary_colors', $parent_brand_id) ?? null;
+
+	$primary_brand = $primary_colors['brand'] ?? '#000000';
+	$primary_text = $primary_colors['text'] ?? '#ffffff';
+
+	$secondary_brand = $secondary_colors['brand'] ?? '#B4B4B4';
+	$secondary_text = $secondary_colors['text'] ?? '#000000';
 	?>
 		<style>
 			:root {
-				--color-brand-primary: <?php echo esc_html($primary_color); ?>;
-				--color-brand-secondary: <?php echo esc_html($secondary_color); ?>;
+				--color-brand-primary: <?php echo esc_html($primary_brand); ?>;
+				--color-text-primary: <?php echo esc_html($primary_text) ?>;
+
+				--color-brand-secondary: <?php echo esc_html($secondary_brand); ?>;
+				--color-text-secondary: <?php echo esc_html($secondary_text); ?>;
 			}
 		</style>
 	<?php
@@ -265,14 +274,26 @@ function andstudio_set_brand_colors_editor() {
 
 	$parent_brand_id = andstudio_get_brand_parent_id($post);
 
-	$primary_color   = get_field('brand_primary_color', $parent_brand_id) ?: '#000000';
-	$secondary_color = get_field('brand_secondary_color', $parent_brand_id) ?: '#f2f2f2';
+	// If no brand found, exit early
+	if (!$parent_brand_id) return;
+
+	$primary_colors = get_field('primary_colors', $parent_brand_id) ?? null;
+	$secondary_colors = get_field('secondary_colors', $parent_brand_id) ?? null;
+
+	$primary_brand = $primary_colors['brand'] ?? '#000000';
+	$primary_text = $primary_colors['text'] ?? '#ffffff';
+
+	$secondary_brand = $secondary_colors['brand'] ?? '#B4B4B4';
+	$secondary_text = $secondary_colors['text'] ?? '#000000';
 
 	$custom_css = "
 		:root {
-			--color-brand-primary: {$primary_color} !important;
-			--color-brand-secondary: {$secondary_color} !important;
-		}
+				--color-brand-primary: <?php echo esc_html($primary_brand); ?>;
+				--color-text-primary: <?php echo esc_html($primary_text) ?>;
+
+				--color-brand-secondary: <?php echo esc_html($secondary_brand); ?>;
+				--color-text-secondary: <?php echo esc_html($secondary_text); ?>;
+			}
 	";
 
 	// Register a virtual stylesheet handle
@@ -467,9 +488,9 @@ add_filter('acf/fields/post_object/query', 'andstudio_limit_page_link_to_childre
 /**
  * Redirect index to the main website
  */
-add_action('template_redirect', function () {
-	if (is_front_page() && !is_admin()) {
-		wp_redirect('https://andstudio.lt/', 301);
-		exit;
-	}
-});
+// add_action('template_redirect', function () {
+// 	if (is_front_page() && !is_admin()) {
+// 		wp_redirect('https://andstudio.lt/', 301);
+// 		exit;
+// 	}
+// });

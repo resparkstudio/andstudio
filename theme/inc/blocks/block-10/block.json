@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-10",
-	"title": "block-10",
-	"description": "block-10 block",
+	"title": "Full-Width Image Panel",
+	"description": "Edge-to-edge side-by-side image composition",
 	"style": ["file:./block-10.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-10"],
+	"keywords": ["andstudio", "image", "full-width", "panel"],
 	"acf": {
 		"renderTemplate": "block-10.php",
 		"blockVersion": 3

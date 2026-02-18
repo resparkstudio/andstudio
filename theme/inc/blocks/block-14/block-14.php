@@ -49,10 +49,28 @@ andstudio_display_block_preview_img($block);
                         <?php foreach ($row_items as $item) :
                             $text_color_class = $item['text_color'] === 'light' ? 'text-neutral-white' : 'text-neutral-black';
                             $hex_color = Hex::fromString($item['color']);
-                            $rgb_color = $hex_color->toRgb();
-                            $cmyk_color = $hex_color->toCmyk();
                             $is_white = $item['color'] === '#ffffff';
-                            $pantone_color = $item['pantone_code']
+                            $pantone_color = $item['pantone_code'];
+                            $rgb_override = $item['rgb_override'] ?? null;
+                            $cmyk_override = $item['cmyk_override'] ?? null;
+                            $additional_info = $item['additional_info'] ?? null;
+
+                            if ($rgb_override) {
+                                $rgb_display = $rgb_override;
+                            } else {
+                                $rgb_color = $hex_color->toRgb();
+                                $rgb_display = $rgb_color->red() . ', ' . $rgb_color->green() . ', ' . $rgb_color->blue();
+                            }
+
+                            if ($cmyk_override) {
+                                $cmyk_display = $cmyk_override;
+                            } else {
+                                $cmyk_color = $hex_color->toCmyk();
+                                $cmyk_display = round($cmyk_color->cyan() * 100) . ', ' .
+                                    round($cmyk_color->magenta() * 100) . ', ' .
+                                    round($cmyk_color->yellow() * 100) . ', ' .
+                                    round($cmyk_color->key() * 100);
+                            }
                         ?>
 
                             <div class="w-full pt-6 border-t border-neutral-grey-2 first:pt-0 first:border-t-0 md:pt-0 md:border-t-0 md:col-span-1">
@@ -80,21 +98,20 @@ andstudio_display_block_preview_img($block);
                                         </div>
                                     <?php endif ?>
 
-                                    <?php if ($rgb_color) : ?>
-                                        <span>RGB: <?php echo esc_html($rgb_color->red() . ', ' . $rgb_color->green() . ', ' . $rgb_color->blue()) ?></span>
+                                    <?php if ($rgb_display) : ?>
+                                        <span>RGB: <?php echo esc_html($rgb_display) ?></span>
                                     <?php endif ?>
 
-                                    <?php if ($cmyk_color) : ?>
-                                        <span>CMYK: <?php echo esc_html(
-                                                        round($cmyk_color->cyan() * 100) . '%, ' .
-                                                            round($cmyk_color->magenta() * 100) . '%, ' .
-                                                            round($cmyk_color->yellow() * 100) . '%, ' .
-                                                            round($cmyk_color->key() * 100) . '%'
-                                                    ) ?></span>
+                                    <?php if ($cmyk_display) : ?>
+                                        <span>CMYK: <?php echo esc_html($cmyk_display) ?></span>
                                     <?php endif ?>
 
                                     <?php if ($pantone_color) : ?>
                                         <span>Pantone: <?php echo esc_html($pantone_color) ?></span>
+                                    <?php endif ?>
+
+                                    <?php if ($additional_info) : ?>
+                                        <span><?php echo esc_html($additional_info) ?></span>
                                     <?php endif ?>
                                 </div>
                             </div>

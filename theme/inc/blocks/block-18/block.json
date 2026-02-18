@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-18",
-	"title": "block-18",
-	"description": "block-18 block",
+	"title": "CTA with Image",
+	"description": "Title, description, button and link above a full-width image",
 	"style": ["file:./block-18.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-18"],
+	"keywords": ["andstudio", "cta", "button", "image"],
 	"acf": {
 		"renderTemplate": "block-18.php",
 		"blockVersion": 3

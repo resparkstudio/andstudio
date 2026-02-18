@@ -13,7 +13,7 @@ andstudio_display_block_preview_img($block);
     <!-- Tab boxed buttons -->
     <?php if ($tabs) : ?>
         <div class="px-5 md:px-0 <?php echo esc_attr($tabs_btn_wrap_classes) ?>">
-            <div class="flex gap-3 bg-brand-secondary p-1.5 rounded-lg md:gap-2 md:bg-transparent md:p-0">
+            <div class="flex gap-3 bg-brand-secondary text-text-secondary p-1.5 rounded-lg md:gap-2 md:bg-transparent md:p-0">
                 <?php foreach ($tabs as $index => $tab) : ?>
                     <button
                         @click="activeTab = <?php echo esc_attr($index) ?>"

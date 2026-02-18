@@ -60,8 +60,7 @@ $pages = andstudio_get_direct_child_pages($parent_page_id);
                                 <div class="<?php echo esc_attr($dot_classes) ?>"></div>
                             </a>
                         <?php else : ?>
-                            <a
-                                href="<?php echo esc_url(get_page_link($page->ID)) ?>"
+                            <button
                                 data-menu-animation="nav-link"
                                 data-submenu-animation="trigger"
                                 data-modal-id="<?php echo esc_attr($page->ID) ?>"
@@ -71,7 +70,7 @@ $pages = andstudio_get_direct_child_pages($parent_page_id);
                                 <svg class="w-6 h-6 group-[.is-current]:hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.00049 17.9995L15.0005 11.9995L9.00049 5.99951" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                            </a>
+                            </button>
 
                             <?php get_template_part('template-parts/layout/submenu', null, array('parent_page' => $page)) ?>
                         <?php endif ?>
@@ -84,8 +83,8 @@ $pages = andstudio_get_direct_child_pages($parent_page_id);
         <!-- Bottom menu content -->
         <div data-menu-animation="privacy-wrap" class="mt-18 px-1 w-full">
             <div class="flex justify-between">
-                <span class="text-xs text-neutral-black">© <?php echo esc_html(date("Y")) ?> Company. All rights reserved.
-                    <a class="underline" href="">Privacy policy</a>
+                <span class="text-xs text-neutral-black">© <?php echo esc_html(date("Y")) ?> <?php echo esc_html(get_bloginfo('name')) ?>. All rights reserved.
+                    <a class="underline" href="<?php echo esc_url(get_privacy_policy_url()) ?>">Privacy policy</a>
                 </span>
                 <a target="_blank" href="https://byandstudio.com/">
                     <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,13 +98,3 @@ $pages = andstudio_get_direct_child_pages($parent_page_id);
     </div>
 
 </div>
-
-
-
-<?php
-// Separate sub-menu wraps
-// Desktop - show all stacked, and change visibility with opacity - only active submenu has opacity of 100 while others are set to 0.
-// Mobile animate like separate modals
-// Sub-menu bg padaryti kaip atskira elementa (kaip main meniu turi pvz)
-
-?>

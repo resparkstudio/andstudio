@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-13",
-	"title": "block-13",
-	"description": "block-13 block",
+	"title": "Horizontal Scroll Gallery",
+	"description": "Sticky horizontal-scroll image gallery on desktop, swiper on mobile",
 	"style": ["file:./block-13.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-13"],
+	"keywords": ["andstudio", "horizontal", "scroll", "gallery"],
 	"acf": {
 		"renderTemplate": "block-13.php",
 		"blockVersion": 3

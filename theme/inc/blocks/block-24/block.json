@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-24",
-	"title": "block-24",
-	"description": "block-24 block",
+	"title": "Image Gallery with Header",
+	"description": "Two-column header with three-column image grid below",
 	"style": ["file:./block-24.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-24"],
+	"keywords": ["andstudio", "gallery", "image", "header"],
 	"acf": {
 		"renderTemplate": "block-24.php",
 		"blockVersion": 3

@@ -11,6 +11,26 @@
  * the block editor.
  */
 
+.editor-visual-editor__post-title-wrapper {
+	@apply m-8;
+}
+
 .wp-block-post-title {
-	@apply hidden;
+	@apply text-h2 m-4 rounded-md border border-[#CCC] p-5 transition-all;
+
+	&:hover {
+		@apply border-[#007CBA];
+	}
+}
+
+.block-list-appender > .block-editor-inserter {
+	@apply mx-4 md:mx-8;
+}
+
+.block-editor-button-block-appender {
+	@apply !h-10 rounded-sm border-none bg-[#007CBA] text-white shadow-none;
+
+	&:hover {
+		@apply bg-[#016BA1] !text-white;
+	}
 }

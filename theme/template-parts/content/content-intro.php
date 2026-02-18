@@ -22,7 +22,7 @@ $image_classes_config = [
     6 => [
         'md:w-[30.6%] md:aspect-[440/461] md:left-[-0.7%] md:top-[-9.2%] z-40',
         'md:w-[28.9%] md:aspect-[416/550] md:left-[35.6%] md:top-[-59.2%] z-20',
-        'w-full h-full md:h-auto md:w-[27.7%] md:aspect-[399/203] md:right-[-4.9%] md:top-[-1.9%] z-60', // Main animation imagr
+        'w-full h-full md:h-auto md:w-[27.7%] md:aspect-[399/203] md:right-[-4.9%] md:top-[-1.9%] z-60', // Main animation image
         'md:w-[29.8%] md:aspect-[429/571] md:right-[0%] md:bottom-[-21.1%] z-10',
         'md:w-[24.1%] md:aspect-[347/230] md:left-[38%] md:bottom-[-16%] z-5  0',
         'md:w-[16.9%] md:aspect-[244/256] md:left-[6%] md:bottom-[-3.9%] z-30',
@@ -38,10 +38,7 @@ $image_classes_config = [
         'md:w-[31%] md:aspect-[447/299] md:left-[-2.9%] md:bottom-[-13.3%] z-50',
     ],
 ];
-
-
 ?>
-
 
 <section class="pt-35 h-screen bg-neutral-black relative overflow-hidden md:flex md:justify-center md:items-center md:pt-0">
 

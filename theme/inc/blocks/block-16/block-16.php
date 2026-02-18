@@ -35,10 +35,28 @@ andstudio_display_block_preview_img($block);
                         <div class="flex flex-col gap-2.5 md:col-span-5 md:even:col-start-7 md:gap-5">
                             <?php foreach ($colors as $color) :
                                 $hex_color = Hex::fromString($color['color']);
-                                $rgb_color = $hex_color->toRgb();
-                                $cmyk_color = $hex_color->toCmyk();
                                 $is_white = $color['color'] === '#ffffff';
-                                $pantone_color = $color['pantone_code']
+                                $pantone_color = $color['pantone_code'];
+                                $rgb_override = $color['rgb_override'] ?? null;
+                                $cmyk_override = $color['cmyk_override'] ?? null;
+                                $additional_info = $color['additional_info'] ?? null;
+
+                                if ($rgb_override) {
+                                    $rgb_display = $rgb_override;
+                                } else {
+                                    $rgb_color = $hex_color->toRgb();
+                                    $rgb_display = $rgb_color->red() . ', ' . $rgb_color->green() . ', ' . $rgb_color->blue();
+                                }
+
+                                if ($cmyk_override) {
+                                    $cmyk_display = $cmyk_override;
+                                } else {
+                                    $cmyk_color = $hex_color->toCmyk();
+                                    $cmyk_display = round($cmyk_color->cyan() * 100) . ', ' .
+                                        round($cmyk_color->magenta() * 100) . ', ' .
+                                        round($cmyk_color->yellow() * 100) . ', ' .
+                                        round($cmyk_color->key() * 100);
+                                }
                             ?>
                                 <div class="flex gap-5 md:gap-6">
                                     <div style="background-color: <?php echo esc_attr($color['color']) ?>;" class="w-full aspect-square rounded-lg md:rounded-xl md:aspect-[282/144] md:w-2/3"></div>
@@ -62,21 +80,20 @@ andstudio_display_block_preview_img($block);
                                             </div>
                                         <?php endif ?>
 
-                                        <?php if ($rgb_color) : ?>
-                                            <span>RGB <?php echo esc_html($rgb_color->red() . ', ' . $rgb_color->green() . ', ' . $rgb_color->blue()) ?></span>
+                                        <?php if ($rgb_display) : ?>
+                                            <span>RGB: <?php echo esc_html($rgb_display) ?></span>
                                         <?php endif ?>
 
-                                        <?php if ($cmyk_color) : ?>
-                                            <span>CMYK <?php echo esc_html(
-                                                            round($cmyk_color->cyan() * 100) . ', ' .
-                                                                round($cmyk_color->magenta() * 100) . ', ' .
-                                                                round($cmyk_color->yellow() * 100) . ', ' .
-                                                                round($cmyk_color->key() * 100) . ''
-                                                        ) ?></span>
+                                        <?php if ($cmyk_display) : ?>
+                                            <span>CMYK: <?php echo esc_html($cmyk_display) ?></span>
                                         <?php endif ?>
 
                                         <?php if ($pantone_color) : ?>
                                             <span>Pantone: <?php echo esc_html($pantone_color) ?></span>
+                                        <?php endif ?>
+
+                                        <?php if ($additional_info) : ?>
+                                            <span><?php echo esc_html($additional_info) ?></span>
                                         <?php endif ?>
                                     </div>
                                 </div>

@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-6",
-	"title": "block-6",
-	"description": "block-6 block",
+	"title": "Feature Cards",
+	"description": "Cards with title and description, swiper on mobile",
 	"style": ["file:./block-6.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-6"],
+	"keywords": ["andstudio", "feature", "cards", "grid"],
 	"acf": {
 		"renderTemplate": "block-6.php",
 		"blockVersion": 3

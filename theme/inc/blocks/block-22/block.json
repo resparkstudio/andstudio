@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-22",
-	"title": "block-22",
-	"description": "block-22 block",
+	"title": "Portrait Image Grid",
+	"description": "Three-column grid of portrait images",
 	"style": ["file:./block-22.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-22"],
+	"keywords": ["andstudio", "portrait", "image", "grid", "three-column"],
 	"acf": {
 		"renderTemplate": "block-22.php",
 		"blockVersion": 3

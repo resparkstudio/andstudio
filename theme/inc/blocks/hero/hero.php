@@ -42,7 +42,7 @@ $banner_width_class = $is_full_width ? 'md:w-full' : '';
 
 
                 <?php if ($download_link && !$is_logotype) : ?>
-                    <div class="mt-8 p-5 rounded-lg bg-brand-primary md:mt-0 md:flex md:flex-col md:justify-between md:min-w-[20.25rem] md:rounded-xl">
+                    <div class="mt-8 p-5 rounded-lg bg-brand-primary text-text-primary md:mt-0 md:flex md:flex-col md:justify-between md:min-w-[20.25rem] md:rounded-xl">
                         <div>
                             <?php if ($download_title) : ?>
                                 <h2 class="text-body-m text-neutral-white md:text-h3"><?php echo esc_html($download_title) ?></h2>
@@ -68,7 +68,7 @@ $banner_width_class = $is_full_width ? 'md:w-full' : '';
                 <?php endif ?>
 
                 <?php if ($download_link && $is_logotype) : ?>
-                    <a class="bg-brand-primary text-body-s text-neutral-white flex justify-between items-center rounded-lg mt-8 w-full p-5 md:hidden" target="<?php echo esc_attr($download_link['target'] ? $download_link['target'] : '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
+                    <a class="bg-brand-primary text-body-s text-text-primary flex justify-between items-center rounded-lg mt-8 w-full p-5 md:hidden" target="<?php echo esc_attr($download_link['target'] ? $download_link['target'] : '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
                         <?php echo esc_html($download_link['title']) ?>
                         <svg class="w-8 h-8 text-neutral-white" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.9997 5.3335V20.0002M15.9997 20.0002L9.33301 13.3335M15.9997 20.0002L22.6663 13.3335" stroke="currentColor" />
@@ -88,7 +88,7 @@ $banner_width_class = $is_full_width ? 'md:w-full' : '';
                     <?php endif ?>
 
                     <?php if ($download_link) : ?>
-                        <a class="bg-brand-primary text-body-s text-neutral-white flex justify-between items-center rounded-xl w-full p-5 grow md:hover:bg-brand-secondary md:hover:text-neutral-black transition-colors duration-200" target="<?php echo esc_attr($download_link['target'] ? $download_link['target'] : '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
+                        <a class="bg-brand-primary text-body-s text-text-primary flex justify-between items-center rounded-xl w-full p-5 grow md:hover:bg-brand-secondary md:hover:text-text-secondary transition-colors duration-200" target="<?php echo esc_attr($download_link['target'] ? $download_link['target'] : '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
                             <?php echo esc_html($download_link['title']) ?>
                             <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.9997 5.3335V20.0002M15.9997 20.0002L9.33301 13.3335M15.9997 20.0002L22.6663 13.3335" stroke="currentColor" />

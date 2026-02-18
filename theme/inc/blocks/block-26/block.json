@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-26",
-	"title": "block-26",
-	"description": "block-26 block",
+	"title": "Banner Image with Cards",
+	"description": "Full-width image with three text-only info cards below",
 	"style": ["file:./block-26.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-26"],
+	"keywords": ["andstudio", "banner", "image", "info", "cards"],
 	"acf": {
 		"renderTemplate": "block-26.php",
 		"blockVersion": 3

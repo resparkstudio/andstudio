@@ -7,7 +7,7 @@
  */
 
 html {
-	font-size: 1.3125rem;
+	font-size: calc(0.2500000000000001rem + 0.8333333333333333vw);
 }
 @media screen and (max-width: 1920px) {
 	html {
@@ -16,12 +16,17 @@ html {
 }
 @media screen and (max-width: 1440px) {
 	html {
-		font-size: calc(0.5317377731529657rem + 0.5202913631633715vw);
+		font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
 	}
 }
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 767px) {
 	html {
-		font-size: calc(0.9994769874476988rem + 0.8368200836820083vw);
+		font-size: calc(0.21399999999999997rem + 3.2vw);
+	}
+}
+@media screen and (max-width: 393px) {
+	html {
+		font-size: calc(0.7493622448979592rem + 1.020408163265306vw);
 	}
 }
 

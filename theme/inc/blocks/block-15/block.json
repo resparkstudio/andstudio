@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-15",
-	"title": "block-15",
-	"description": "block-15 block",
+	"title": "Color Proportions",
+	"description": "Horizontal colored segments with percentage widths",
 	"style": ["file:./block-15.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-15"],
+	"keywords": ["andstudio", "color", "proportion", "bar"],
 	"acf": {
 		"renderTemplate": "block-15.php",
 		"blockVersion": 3

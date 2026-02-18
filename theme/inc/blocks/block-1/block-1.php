@@ -40,7 +40,7 @@ andstudio_display_block_preview_img($block);
                 <?php foreach ($numbered_items as $index => $numbered_item) :
                     $text = $numbered_item['text'];
                 ?>
-                    <li class="flex gap-5 bg-brand-secondary rounded-xl py-4 px-5 md:gap-8 md:py-6 md:px-10">
+                    <li class="flex gap-5 bg-brand-secondary text-text-secondary rounded-xl py-4 px-5 md:gap-8 md:py-6 md:px-10">
                         <span><?php echo esc_html($index + 1) ?></span>
                         <?php echo esc_html($text) ?>
                     </li>

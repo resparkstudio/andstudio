@@ -3,6 +3,27 @@
     "title": "Page: Brand settings",
     "fields": [
         {
+            "key": "field_6995f539e1af3",
+            "label": "Contain menu image",
+            "name": "contain_menu_image",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_690a5807029ce",
             "label": "Enable brand settings",
             "name": "parent_brand_page",
@@ -19,16 +40,16 @@
             "message": "",
             "default_value": 0,
             "allow_in_bindings": 0,
-            "ui": 0,
             "ui_on_text": "",
-            "ui_off_text": ""
+            "ui_off_text": "",
+            "ui": 1
         },
         {
-            "key": "field_68ca9d7e05ccf",
-            "label": "Brand Primary Color",
-            "name": "brand_primary_color",
+            "key": "field_6995f9f2dd6e0",
+            "label": "Primary Colors",
+            "name": "primary_colors",
             "aria-label": "",
-            "type": "color_picker",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -45,21 +66,62 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "enable_opacity": 0,
-            "return_format": "string",
-            "allow_in_bindings": 1,
-            "show_custom_palette": 0,
-            "show_color_wheel": 1,
-            "custom_palette_source": "",
-            "palette_colors": ""
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_6995fa21dd6e2",
+                    "label": "Brand",
+                    "name": "brand",
+                    "aria-label": "",
+                    "type": "color_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "enable_opacity": 0,
+                    "return_format": "string",
+                    "allow_in_bindings": 0,
+                    "show_custom_palette": 0,
+                    "show_color_wheel": 1,
+                    "custom_palette_source": "",
+                    "palette_colors": ""
+                },
+                {
+                    "key": "field_6995fa2bdd6e3",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "color_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "enable_opacity": 0,
+                    "return_format": "string",
+                    "allow_in_bindings": 0,
+                    "show_custom_palette": 0,
+                    "show_color_wheel": 1,
+                    "custom_palette_source": "",
+                    "palette_colors": ""
+                }
+            ]
         },
         {
-            "key": "field_68ca9dd835fe9",
-            "label": "Brand Secondary Color",
-            "name": "brand_secondary_color",
+            "key": "field_6995fa0bdd6e1",
+            "label": "Secondary Colors",
+            "name": "secondary_colors",
             "aria-label": "",
-            "type": "color_picker",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -76,14 +138,55 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "enable_opacity": 0,
-            "return_format": "string",
-            "allow_in_bindings": 1,
-            "show_custom_palette": 0,
-            "show_color_wheel": 1,
-            "custom_palette_source": "",
-            "palette_colors": ""
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_6995fa38dd6e4",
+                    "label": "Brand",
+                    "name": "brand",
+                    "aria-label": "",
+                    "type": "color_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "enable_opacity": 0,
+                    "return_format": "string",
+                    "allow_in_bindings": 0,
+                    "show_custom_palette": 0,
+                    "show_color_wheel": 1,
+                    "custom_palette_source": "",
+                    "palette_colors": ""
+                },
+                {
+                    "key": "field_6995fa3fdd6e5",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "color_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "enable_opacity": 0,
+                    "return_format": "string",
+                    "allow_in_bindings": 0,
+                    "show_custom_palette": 0,
+                    "show_color_wheel": 1,
+                    "custom_palette_source": "",
+                    "palette_colors": ""
+                }
+            ]
         },
         {
             "key": "field_690b6019587a6",
@@ -155,5 +258,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "Brand settings",
-    "modified": 1763559795
+    "modified": 1771438044
 }

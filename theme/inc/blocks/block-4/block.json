@@ -1,12 +1,12 @@
 {
 	"apiVersion": 3,
 	"name": "andstudio/block-4",
-	"title": "block-4",
-	"description": "block-4 block",
+	"title": "Text & Staggered Images",
+	"description": "Title and text with two staggered portrait images",
 	"style": ["file:./block-4.css"],
 	"category": "content",
 	"icon": "admin-comments",
-	"keywords": ["andstudio", "block-4"],
+	"keywords": ["andstudio", "text", "staggered", "images", "portrait"],
 	"acf": {
 		"renderTemplate": "block-4.php",
 		"blockVersion": 3
