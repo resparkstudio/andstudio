@@ -274,9 +274,6 @@ function andstudio_set_brand_colors_editor() {
 
 	$parent_brand_id = andstudio_get_brand_parent_id($post);
 
-	// If no brand found, exit early
-	if (!$parent_brand_id) return;
-
 	$primary_colors = get_field('primary_colors', $parent_brand_id) ?? null;
 	$secondary_colors = get_field('secondary_colors', $parent_brand_id) ?? null;
 
@@ -288,12 +285,11 @@ function andstudio_set_brand_colors_editor() {
 
 	$custom_css = "
 		:root {
-				--color-brand-primary: <?php echo esc_html($primary_brand); ?>;
-				--color-text-primary: <?php echo esc_html($primary_text) ?>;
-
-				--color-brand-secondary: <?php echo esc_html($secondary_brand); ?>;
-				--color-text-secondary: <?php echo esc_html($secondary_text); ?>;
-			}
+			--color-brand-primary: {$primary_brand} !important;
+			--color-text-primary: {$primary_text} !important;
+			--color-brand-secondary: {$secondary_brand} !important;
+			--color-text-secondary: {$secondary_text} !important;
+		}
 	";
 
 	// Register a virtual stylesheet handle
