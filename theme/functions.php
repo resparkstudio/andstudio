@@ -260,3 +260,12 @@ require get_template_directory() . '/inc/ajax-handlers.php';
  * ACF blocks
  */
 require get_template_directory() . '/inc/blocks/blocks-setup.php';
+
+/**
+ * Remove unused wp admin menu links
+ */
+function andstudio_remove_admin_menus() {
+	remove_menu_page('edit.php');          // Posts
+	remove_menu_page('edit-comments.php'); // Comments
+}
+add_action('admin_menu', 'andstudio_remove_admin_menus');
