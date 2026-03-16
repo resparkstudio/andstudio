@@ -13,9 +13,6 @@
  */
 function andstudio_register_acf_blocks() {
     register_block_type(__DIR__ . '/dashboard');
-    register_block_type(__DIR__ . '/content-wrap');
-    register_block_type(__DIR__ . '/hero');
-    register_block_type(__DIR__ . '/page-transition');
     register_block_type(__DIR__ . '/faq');
     register_block_type(__DIR__ . '/contact');
     register_block_type(__DIR__ . '/page-end');
@@ -75,9 +72,6 @@ function andstudio_allowed_block_types($allowed_blocks, $editor_context) {
 
     return array(
         'andstudio/dashboard',
-        'andstudio/content-wrap',
-        'andstudio/hero',
-        'andstudio/page-transition',
         'andstudio/faq',
         'andstudio/contact',
         'andstudio/page-end',

@@ -25,11 +25,19 @@ andstudio_display_block_preview_img($block);
 
         <?php if ($items) : ?>
             <div class="mt-6 flex flex-col gap-6 md:mt-16 md:grid md:grid-cols-2 md:gap-10">
-                <?php foreach ($items as $item) : ?>
+                <?php foreach ($items as $item) :
+                    $item_video_url = $item['video'] && $item['video_group'] ? ($item['video_group']['video_url'] ?: ($item['video_group']['video_file']['url'] ?? '')) : '';
+                ?>
                     <div class="pt-6 border-t border-neutral-grey-2 first:pt-0 first:border-t-0 md:pt-0 md:border-t-0">
-                        <?php echo wp_get_attachment_image($item['image']['id'], 'full', false, array(
-                            'class' => 'object-cover w-full aspect-[572/369]',
-                        )); ?>
+                        <div class="w-full aspect-[572/369]">
+                            <?php if ($item_video_url) : ?>
+                                <?php andstudio_background_video($item_video_url); ?>
+                            <?php else : ?>
+                                <?php echo wp_get_attachment_image($item['image']['id'], 'full', false, array(
+                                    'class' => 'w-full h-full object-cover',
+                                )); ?>
+                            <?php endif ?>
+                        </div>
 
                         <?php if ($item['description']) : ?>
                             <div class="andstudio-wysiwyg-container text-body-s mt-2.5 md:mt-4">

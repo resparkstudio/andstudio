@@ -6,6 +6,10 @@ $small_image = get_field('small_image') ?? false;
 $description = get_field('description') ?? false;
 $link = get_field('link') ?? false;
 $image = get_field('image') ?? false;
+$video = get_field('video');
+$video_group = get_field('video_group');
+
+$video_url = $video && $video_group ? ($video_group['video_url'] ?: ($video_group['video_file']['url'] ?? '')) : '';
 
 andstudio_display_block_preview_img($block);
 ?>
@@ -37,11 +41,17 @@ andstudio_display_block_preview_img($block);
                 <?php endif ?>
             </div>
 
-            <?php if ($image) {
-                echo wp_get_attachment_image($image['id'], 'full', false, array(
-                    'class' => 'w-full object-cover aspect-square mt-8 md:mt-0 md:w-1/2'
-                ));
-            } ?>
+            <?php if ($video_url || $image) : ?>
+                <div class="w-full aspect-square mt-8 md:mt-0 md:w-1/2">
+                    <?php if ($video_url) : ?>
+                        <?php andstudio_background_video($video_url); ?>
+                    <?php else : ?>
+                        <?php echo wp_get_attachment_image($image['id'], 'full', false, array(
+                            'class' => 'w-full h-full object-cover'
+                        )); ?>
+                    <?php endif ?>
+                </div>
+            <?php endif ?>
         </div>
     </div>
 </section>

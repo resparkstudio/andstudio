@@ -28,7 +28,9 @@ andstudio_display_block_preview_img($block);
 
         <?php if ($items) : ?>
             <div class="flex flex-col gap-8 mt-8 md:mt-16 md:gap-10">
-                <?php foreach ($items as $item) : ?>
+                <?php foreach ($items as $item) :
+                    $item_video_url = $item['video'] && $item['video_group'] ? ($item['video_group']['video_url'] ?: ($item['video_group']['video_file']['url'] ?? '')) : '';
+                ?>
                     <div class="pt-8 border-t border-neutral-grey-2 md:first:border-t-0 md:first:pt-0 md:pt-10 md:flex md:gap-8 md:items-end md:justify-between">
                         <div class="md:max-w-120.5 md:pb-4">
                             <?php if ($item['title']) : ?>
@@ -42,11 +44,15 @@ andstudio_display_block_preview_img($block);
                             <?php endif ?>
                         </div>
 
-                        <?php if ($item['image']) {
-                            echo wp_get_attachment_image($item['image']['id'], 'full', false, array(
-                                'class' => 'w-full mt-8 aspect-[353/305] object-cover md:mt-0 md:w-1/2 md:aspect-[580/368]'
-                            ));
-                        } ?>
+                        <div class="relative w-full mt-8 aspect-[353/305] md:mt-0 md:w-1/2 md:aspect-[580/368]">
+                            <?php if ($item_video_url) : ?>
+                                <?php andstudio_background_video($item_video_url); ?>
+                            <?php elseif ($item['image']) : ?>
+                                <?php echo wp_get_attachment_image($item['image']['id'], 'full', false, array(
+                                    'class' => 'w-full h-full object-cover'
+                                )); ?>
+                            <?php endif ?>
+                        </div>
                     </div>
                 <?php endforeach ?>
             </div>

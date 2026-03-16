@@ -5,6 +5,9 @@ $boxed = get_field('boxed');
 $title = get_field('title');
 $description = get_field('description');
 $link = get_field('link');
+$video = get_field('video');
+$video_group = get_field('video_group');
+$video_url = $video && $video_group ? ($video_group['video_url'] ?: ($video_group['video_file']['url'] ?? '')) : '';
 $image = get_field('image');
 $mobile_image = get_field('mobile_image');
 
@@ -37,11 +40,15 @@ andstudio_display_block_preview_img($block);
             </div>
         </div>
 
-        <?php if ($image) : ?>
-            <img class="hidden md:block md:mt-16 md:w-full md:object-cover md:rounded-xl" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
-        <?php endif ?>
-        <?php if ($mobile_image) : ?>
-            <img class=" w-full object-cover mt-8 rounded-lg md:hidden" src="<?php echo esc_url($mobile_image['url']) ?>" alt="<?php echo esc_attr($mobile_image['alt']) ?>">
+        <?php if ($video_url) : ?>
+            <div class="relative w-full mt-8 md:mt-16 aspect-video rounded-lg md:rounded-xl"><?php andstudio_background_video($video_url); ?></div>
+        <?php else : ?>
+            <?php if ($image) : ?>
+                <img class="hidden md:block md:mt-16 md:w-full md:object-cover md:rounded-xl" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
+            <?php endif ?>
+            <?php if ($mobile_image) : ?>
+                <img class="w-full object-cover mt-8 rounded-lg md:hidden" src="<?php echo esc_url($mobile_image['url']) ?>" alt="<?php echo esc_attr($mobile_image['alt']) ?>">
+            <?php endif ?>
         <?php endif ?>
     </div>
 </section>

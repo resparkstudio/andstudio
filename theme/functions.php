@@ -201,6 +201,10 @@ add_action('enqueue_block_assets', 'andstudio_enqueue_block_editor_script');
  */
 function andstudio_tinymce_add_class($settings) {
 	$settings['body_class'] = ANDSTUDIO_TYPOGRAPHY_CLASSES;
+	$reset = 'html { font-size: 16px; }';
+	$settings['content_style'] = isset($settings['content_style'])
+		? $settings['content_style'] . ' ' . $reset
+		: $reset;
 	return $settings;
 }
 add_filter('tiny_mce_before_init', 'andstudio_tinymce_add_class');

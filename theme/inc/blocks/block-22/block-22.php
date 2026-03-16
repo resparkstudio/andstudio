@@ -24,12 +24,18 @@ andstudio_display_block_preview_img($block);
 
         <?php if ($images) : ?>
             <div class="mt-8 flex flex-col gap-2.5 md:grid md:grid-cols-3 md:gap-5 md:mt-16">
-                <?php foreach ($images as $image) : ?>
-                    <?php if ($image['image']) : ?>
-                        <img class="hidden md:block md:object-cover md:w-full md:aspect-[381/472]" src="<?php echo esc_url($image['image']['url']) ?>" alt="<?php echo esc_attr($image['image']['alt']) ?>">
-                    <?php endif ?>
-                    <?php if ($image['mobile_image']) : ?>
-                        <img class="object-cover w-full aspect-[353/436] md:hidden" src="<?php echo esc_url($image['mobile_image']['url']) ?>" alt="<?php echo esc_attr($image['mobile_image']['alt']) ?>">
+                <?php foreach ($images as $image) :
+                    $item_video_url = $image['video'] && $image['video_group'] ? ($image['video_group']['video_url'] ?: ($image['video_group']['video_file']['url'] ?? '')) : '';
+                ?>
+                    <?php if ($item_video_url) : ?>
+                        <div class="relative w-full aspect-[353/436] md:aspect-[381/472]"><?php andstudio_background_video($item_video_url); ?></div>
+                    <?php else : ?>
+                        <?php if ($image['image']) : ?>
+                            <img class="hidden md:block md:object-cover md:w-full md:aspect-[381/472]" src="<?php echo esc_url($image['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($image['image']['alt'] ?? '') ?>">
+                        <?php endif ?>
+                        <?php if ($image['mobile_image']) : ?>
+                            <img class="object-cover w-full aspect-[353/436] md:hidden" src="<?php echo esc_url($image['mobile_image']['url'] ?? '') ?>" alt="<?php echo esc_attr($image['mobile_image']['alt'] ?? '') ?>">
+                        <?php endif ?>
                     <?php endif ?>
                 <?php endforeach ?>
             </div>

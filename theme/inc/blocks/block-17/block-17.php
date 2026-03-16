@@ -47,10 +47,16 @@ andstudio_display_block_preview_img($block);
                     <?php if ($tab['images']) : ?>
                         <div data-swiper="block-17" class="mt-8 md:mt-16 md:overflow-hidden">
                             <div class="swiper-wrapper md:aspect-[1240/460]">
-                                <?php foreach ($tab['images'] as $image) : ?>
+                                <?php foreach ($tab['images'] as $image) :
+                                    $item_video_url = $image['video'] && $image['video_group'] ? ($image['video_group']['video_url'] ?: ($image['video_group']['video_file']['url'] ?? '')) : '';
+                                ?>
                                     <div class="swiper-slide">
                                         <div class="block-17_img-wrap aspect-[620/460] w-full md:scale-75">
-                                            <img class="w-full h-full object-cover" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
+                                            <?php if ($item_video_url) : ?>
+                                                <?php andstudio_background_video($item_video_url); ?>
+                                            <?php else : ?>
+                                                <img class="w-full h-full object-cover" src="<?php echo esc_url($image['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($image['image']['alt'] ?? '') ?>">
+                                            <?php endif ?>
                                         </div>
                                     </div>
                                 <?php endforeach ?>

@@ -1,8 +1,13 @@
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export function pageScrollTransition() {
+	let lastNonHashUrl = window.location.pathname + window.location.search;
 	window.addEventListener('popstate', () => {
-		window.location.reload();
+		const currentNonHashUrl = window.location.pathname + window.location.search;
+		if (currentNonHashUrl !== lastNonHashUrl) {
+			window.location.reload();
+		}
+		lastNonHashUrl = currentNonHashUrl;
 	});
 
 	const content = document.querySelector('[data-scroll-transition="content"]');

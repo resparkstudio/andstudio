@@ -34,7 +34,9 @@ andstudio_display_block_preview_img($block);
 
         <?php if ($items) : ?>
             <div class="flex flex-col gap-8 mt-8 md:mt-16 md:gap-10">
-                <?php foreach ($items as $item) : ?>
+                <?php foreach ($items as $item) :
+                    $item_video_url = $item['video'] && $item['video_group'] ? ($item['video_group']['video_url'] ?: ($item['video_group']['video_file']['url'] ?? '')) : '';
+                ?>
                     <!-- Horizontal Layout -->
                     <div class="pt-8 border-t border-neutral-grey-2 md:pt-10 md:flex md:items-end md:gap-10 md:justify-between">
                         <div class="md:max-w-120.5 md:pb-4">
@@ -47,11 +49,15 @@ andstudio_display_block_preview_img($block);
                                 </div>
                             <?php endif ?>
                         </div>
-                        <?php if ($item['image']) : ?>
-                            <img class="hidden md:block md:mt-0 md:w-7/12 md:object-cover md:aspect-[678/338] shrink-0" src="<?php echo esc_url($item['image']['url']) ?>" alt="<?php echo esc_attr($item['image']['alt']) ?>">
-                        <?php endif ?>
-                        <?php if ($item['mobile_image']) : ?>
-                            <img class="w-full mt-8 aspect-[353/224] object-cover md:hidden" src="<?php echo esc_url($item['mobile_image']['url']) ?>" alt="<?php echo esc_attr($item['mobile_image']['alt']) ?>">
+                        <?php if ($item_video_url) : ?>
+                            <div class="relative w-full mt-8 md:mt-0 md:w-7/12 shrink-0 aspect-[353/224] md:aspect-[678/338]"><?php andstudio_background_video($item_video_url); ?></div>
+                        <?php else : ?>
+                            <?php if ($item['image']) : ?>
+                                <img class="hidden md:block md:mt-0 md:w-7/12 md:object-cover md:aspect-[678/338] shrink-0" src="<?php echo esc_url($item['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($item['image']['alt'] ?? '') ?>">
+                            <?php endif ?>
+                            <?php if ($item['mobile_image']) : ?>
+                                <img class="w-full mt-8 aspect-[353/224] object-cover md:hidden" src="<?php echo esc_url($item['mobile_image']['url'] ?? '') ?>" alt="<?php echo esc_attr($item['mobile_image']['alt'] ?? '') ?>">
+                            <?php endif ?>
                         <?php endif ?>
                     </div>
                 <?php endforeach ?>

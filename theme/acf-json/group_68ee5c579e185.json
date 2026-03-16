@@ -1,6 +1,6 @@
 {
     "key": "group_68ee5c579e185",
-    "title": "Block: Centered Text",
+    "title": "Block: Text Section",
     "fields": [
         {
             "key": "field_68ee5c57e410e",
@@ -85,5 +85,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763559795
+    "modified": 1773658138
 }

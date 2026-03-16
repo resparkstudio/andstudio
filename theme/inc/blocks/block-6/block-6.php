@@ -16,7 +16,7 @@ andstudio_display_block_preview_img($block);
 
         <?php if ($items) : ?>
             <div data-swiper="block-6" class="mt-6 md:mt-16">
-                <div class="swiper-wrapper md:grid md:grid-cols-3 md:gap-5">
+                <div class="swiper-wrapper md:grid md:grid-cols-3 md:gap-5 md:h-auto">
                     <?php foreach ($items as $item) :
                         $title = $item['title'];
                         $description = $item['description'];

@@ -314,6 +314,7 @@
                     "collapsed": "",
                     "button_label": "Add Link",
                     "rows_per_page": 20,
+                    "parent_repeater": "field_6909d2ecbb921",
                     "sub_fields": [
                         {
                             "key": "field_6909d33ebb926",
@@ -333,8 +334,7 @@
                             "allow_in_bindings": 0,
                             "parent_repeater": "field_6909d32dbb925"
                         }
-                    ],
-                    "parent_repeater": "field_6909d2ecbb921"
+                    ]
                 }
             ]
         },
@@ -520,5 +520,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763559795
+    "modified": 1773658138
 }

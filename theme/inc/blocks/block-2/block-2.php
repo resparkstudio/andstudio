@@ -1,11 +1,14 @@
 <?php
-$anchor_title = get_field('anchor_title') ?? false;
-$boxed = get_field('boxed') ?? false;
-$subtitle = get_field('subtitle') ?? false;
-$title = get_field('title') ?? false;
-$text = get_field('text') ?? false;
-$desktop_image = get_field('desktop_image') ?? false;
-$mobile_image = get_field('mobile_image') ?? false;
+$anchor_title = get_field('anchor_title');
+$boxed = get_field('boxed');
+$subtitle = get_field('subtitle');
+$title = get_field('title');
+$text = get_field('text');
+$image_group = get_field('image_group');
+$video = get_field('video');
+$video_group = get_field('video_group');
+
+
 
 andstudio_display_block_preview_img($block);
 ?>
@@ -29,14 +32,22 @@ andstudio_display_block_preview_img($block);
                 </div>
             <?php endif ?>
 
-            <?php if ($desktop_image || $mobile_image) : ?>
-                <div class="mt-8 md:mt-10">
-                    <?php echo wp_get_attachment_image($mobile_image['id'], 'full', false, array(
-                        'class' => 'w-full object-cover aspect-[353/305] md:hidden'
-                    )); ?>
-                    <?php echo wp_get_attachment_image($desktop_image['id'], 'full', false, array(
-                        'class' => 'hidden w-full object-cover aspect-[1184/500] md:block'
-                    )); ?>
+            <?php
+            $video_url = $video && $video_group ? ($video_group['video_url'] ?: ($video_group['video_file']['url'] ?? '')) : '';
+            $has_image = $image_group && ($image_group['desktop_image'] || $image_group['mobile_image']);
+            ?>
+            <?php if ($video_url || $has_image) : ?>
+                <div class="mt-8 md:mt-10 aspect-[353/305] md:aspect-[1184/500]">
+                    <?php if ($video_url) : ?>
+                        <?php andstudio_background_video($video_url); ?>
+                    <?php else : ?>
+                        <?php echo wp_get_attachment_image($image_group['mobile_image']['id'], 'full', false, array(
+                            'class' => 'w-full h-full object-cover md:hidden'
+                        )); ?>
+                        <?php echo wp_get_attachment_image($image_group['desktop_image']['id'], 'full', false, array(
+                            'class' => 'hidden w-full h-full object-cover md:block'
+                        )); ?>
+                    <?php endif ?>
                 </div>
             <?php endif ?>
         <?php endif ?>

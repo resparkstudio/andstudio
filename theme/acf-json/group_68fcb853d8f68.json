@@ -1,6 +1,6 @@
 {
     "key": "group_68fcb853d8f68",
-    "title": "Block: block-14",
+    "title": "Block: Color Palette (Multi-Row)",
     "fields": [
         {
             "key": "field_68fcb8537ca3f",
@@ -314,5 +314,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771237881
+    "modified": 1773658138
 }

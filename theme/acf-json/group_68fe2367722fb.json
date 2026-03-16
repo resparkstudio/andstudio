@@ -1,6 +1,6 @@
 {
     "key": "group_68fe2367722fb",
-    "title": "Block: block-16",
+    "title": "Block: Color Palette (Grouped)",
     "fields": [
         {
             "key": "field_68fe236702f06",
@@ -41,7 +41,7 @@
             "allow_in_bindings": 0,
             "tabs": "visual",
             "toolbar": "basic",
-            "media_upload": 1,
+            "media_upload": 0,
             "delay": 0
         },
         {
@@ -224,5 +224,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771237949
+    "modified": 1773658138
 }

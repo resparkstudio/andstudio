@@ -17,14 +17,18 @@ andstudio_display_block_preview_img($block);
             <!-- Mobile layout -->
             <div data-swiper="block-23" class="mt-8 md:hidden">
                 <div class="swiper-wrapper">
-                    <?php foreach ($items as $item) : ?>
+                    <?php foreach ($items as $item) :
+                        $item_video_url = $item['video'] && $item['video_group'] ? ($item['video_group']['video_url'] ?: ($item['video_group']['video_file']['url'] ?? '')) : '';
+                    ?>
                         <div class="swiper-slide">
                             <?php if ($item['subtitle']) : ?>
                                 <h3 class="text-body-m"><?php echo esc_html($item['subtitle']) ?></h3>
                             <?php endif ?>
 
-                            <?php if ($item['image']) : ?>
-                                <img src="<?php echo esc_url($item['image']['url']) ?>" alt="<?php echo esc_attr($item['image']['alt']) ?>" class="w-full object-cover aspect-[340/267] rounded-lg mt-4">
+                            <?php if ($item_video_url) : ?>
+                                <div class="overflow-hidden relative w-full aspect-[340/267] rounded-lg mt-4"><?php andstudio_background_video($item_video_url); ?></div>
+                            <?php elseif ($item['image']) : ?>
+                                <img src="<?php echo esc_url($item['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($item['image']['alt'] ?? '') ?>" class="w-full object-cover aspect-[340/267] rounded-lg mt-4">
                             <?php endif ?>
 
                             <?php if ($item['title'] || $item['description'] || $item['button']) : ?>
@@ -52,14 +56,18 @@ andstudio_display_block_preview_img($block);
 
             <!-- Desktop layout -->
             <div class="hidden md:grid md:grid-cols-3 md:mt-16 md:gap-5">
-                <?php foreach ($items as $item) : ?>
+                <?php foreach ($items as $item) :
+                    $item_video_url = $item['video'] && $item['video_group'] ? ($item['video_group']['video_url'] ?: ($item['video_group']['video_file']['url'] ?? '')) : '';
+                ?>
                     <div>
                         <?php if ($item['subtitle']) : ?>
                             <h3 class="text-body-m md:mx-6"><?php echo esc_html($item['subtitle']) ?></h3>
                         <?php endif ?>
 
-                        <?php if ($item['image']) : ?>
-                            <img src="<?php echo esc_url($item['image']['url']) ?>" alt="<?php echo esc_attr($item['image']['alt']) ?>" class="md:w-full md:object-cover md:aspect-[340/267] md:rounded-xl md:mt-6">
+                        <?php if ($item_video_url) : ?>
+                            <div class="overflow-hidden relative md:w-full md:aspect-[340/267] md:rounded-xl md:mt-6"><?php andstudio_background_video($item_video_url); ?></div>
+                        <?php elseif ($item['image']) : ?>
+                            <img src="<?php echo esc_url($item['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($item['image']['alt'] ?? '') ?>" class="md:w-full md:object-cover md:aspect-[340/267] md:rounded-xl md:mt-6">
                         <?php endif ?>
 
                         <?php if ($item['title'] || $item['description'] || $item['button']) : ?>

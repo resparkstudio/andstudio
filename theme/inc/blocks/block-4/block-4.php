@@ -4,10 +4,15 @@ $boxed = get_field('boxed') ?? false;
 $subtitle = get_field('subtitle') ?? false;
 $title = get_field('title') ?? false;
 $text = get_field('text') ?? false;
-$first_image = get_field('first_image') ?? false;
-$first_image_mobile = get_field('first_image_mobile') ?? false;
-$second_image = get_field('second_image') ?? false;
-$second_image_mobile = get_field('second_image_mobile') ?? false;
+$first_video = get_field('first_video');
+$first_image_group = get_field('first_image_group');
+$first_video_group = get_field('first_video_group');
+$second_video = get_field('second_video');
+$second_image_group = get_field('second_image_group');
+$second_video_group = get_field('second_video_group');
+
+$first_video_url = $first_video && $first_video_group ? ($first_video_group['video_url'] ?: ($first_video_group['video_file']['url'] ?? '')) : '';
+$second_video_url = $second_video && $second_video_group ? ($second_video_group['video_url'] ?: ($second_video_group['video_file']['url'] ?? '')) : '';
 
 andstudio_display_block_preview_img($block);
 ?>
@@ -26,11 +31,17 @@ andstudio_display_block_preview_img($block);
 
         <div class="flex flex-col gap-8 mt-8 md:grid md:grid-cols-12 md:mt-16 md:items-end md:gap-5">
 
-            <?php if ($first_image_mobile) {
-                echo wp_get_attachment_image($first_image_mobile['id'], 'full', false, array(
-                    'class' => 'w-full object-cover aspect-[353/305] md:hidden'
-                ));
-            } ?>
+            <?php if ($first_video_url || ($first_image_group && $first_image_group['mobile_image'])) : ?>
+                <div class="w-full aspect-[353/305] md:hidden">
+                    <?php if ($first_video_url) : ?>
+                        <?php andstudio_background_video($first_video_url); ?>
+                    <?php else : ?>
+                        <?php echo wp_get_attachment_image($first_image_group['mobile_image']['id'], 'full', false, array(
+                            'class' => 'w-full h-full object-cover'
+                        )); ?>
+                    <?php endif ?>
+                </div>
+            <?php endif ?>
 
             <?php if ($text) : ?>
                 <div class="andstudio-wysiwyg-container text-body-s md:col-span-4 md:pb-16">
@@ -38,23 +49,42 @@ andstudio_display_block_preview_img($block);
                 </div>
             <?php endif ?>
 
-            <?php if ($second_image_mobile) {
-                echo wp_get_attachment_image($second_image_mobile['id'], 'full', false, array(
-                    'class' => 'w-full object-cover aspect-[353/380] md:hidden'
-                ));
-            } ?>
+            <?php if ($second_video_url || ($second_image_group && $second_image_group['mobile_image'])) : ?>
+                <div class="w-full aspect-[353/380] md:hidden">
+                    <?php if ($second_video_url) : ?>
+                        <?php andstudio_background_video($second_video_url); ?>
+                    <?php else : ?>
+                        <?php echo wp_get_attachment_image($second_image_group['mobile_image']['id'], 'full', false, array(
+                            'class' => 'w-full h-full object-cover'
+                        )); ?>
+                    <?php endif ?>
+                </div>
+            <?php endif ?>
 
-            <?php if ($first_image) {
-                echo wp_get_attachment_image($first_image['id'], 'full', false, array(
-                    'class' => 'hidden w-full object-cover aspect-[382/488] md:block md:col-span-4'
-                ));
-            } ?>
+            <?php if ($first_video_url || ($first_image_group && $first_image_group['desktop_image'])) : ?>
+                <div class="hidden w-full md:block md:col-span-4 aspect-[382/488]">
+                    <?php if ($first_video_url) : ?>
+                        <?php andstudio_background_video($first_video_url); ?>
+                    <?php else : ?>
+                        <?php echo wp_get_attachment_image($first_image_group['desktop_image']['id'], 'full', false, array(
+                            'class' => 'w-full h-full object-cover'
+                        )); ?>
+                    <?php endif ?>
+                </div>
+            <?php endif ?>
 
-            <?php if ($second_image) {
-                echo wp_get_attachment_image($second_image['id'], 'full', false, array(
-                    'class' => 'hidden w-full object-cover aspect-[382/600] md:block md:col-span-4'
-                ));
-            } ?>
+            <?php if ($second_video_url || ($second_image_group && $second_image_group['desktop_image'])) : ?>
+                <div class="hidden w-full md:block md:col-span-4 aspect-[382/600]">
+                    <?php if ($second_video_url) : ?>
+                        <?php andstudio_background_video($second_video_url); ?>
+                    <?php else : ?>
+                        <?php echo wp_get_attachment_image($second_image_group['desktop_image']['id'], 'full', false, array(
+                            'class' => 'w-full h-full object-cover'
+                        )); ?>
+                    <?php endif ?>
+                </div>
+            <?php endif ?>
+
         </div>
     </div>
 </section>

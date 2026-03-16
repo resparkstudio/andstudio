@@ -1,6 +1,6 @@
 {
     "key": "group_68fe1a90935be",
-    "title": "Block: Color Proportion Bar",
+    "title": "Block: Color Proportions",
     "fields": [
         {
             "key": "field_68fe1a9050181",
@@ -41,7 +41,7 @@
             "allow_in_bindings": 0,
             "tabs": "visual",
             "toolbar": "basic",
-            "media_upload": 1,
+            "media_upload": 0,
             "delay": 0
         },
         {
@@ -163,5 +163,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771084344
+    "modified": 1773658138
 }

@@ -32,10 +32,11 @@ $image_classes = match ($contain_menu_image) {
         <img
             src="<?php echo esc_url($thumbnail_url) ?>"
             alt=""
-            class="absolute inset-0 w-full h-full transition-transform duration-300 md:group-hover:scale-105 <?php echo esc_attr($image_classes) ?>" />
+            class="absolute inset-0 w-full h-full transition-transform duration-300 md:group-hover:scale-105 will-change-transform <?php echo esc_attr($image_classes) ?>" />
     <?php endif ?>
 
     <h3 class="<?php echo esc_attr($text_color) ?> text-body-m text-start md:group-hover:text-neutral-white transition-colors duration-300 relative z-10"><?php echo esc_html($sub_page->post_title) ?></h3>
+
     <button class="bg-brand-primary text-neutral-white rounded-full w-8 h-8 flex items-center justify-center md:group-hover:bg-neutral-white md:group-hover:text-neutral-black transition-colors duration-300 relative z-10 md:self-end">
         <svg class="w-2.5 h-2.5" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11 1L11 11M11 11L0.999999 11M11 11L1 1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />

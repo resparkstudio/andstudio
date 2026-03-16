@@ -69,7 +69,7 @@ if ($parent_page_id) {
         </div>
 
         <!-- Download dropdown -->
-        <?php if ($download_links) : ?>
+        <?php if (!empty($download_links)) : ?>
             <div x-data='{"expanded" : false}' class="hidden md:block shrink-0 relative">
                 <button @click="expanded = !expanded" class="group flex items-center gap-3 p-4 bg-neutral-white rounded-lg text-body-s hover:bg-brand-primary hover:text-neutral-white transition-colors duration-200">
                     <?php _e('Download elements', 'andstudio') ?>
@@ -83,10 +83,16 @@ if ($parent_page_id) {
                 <div class="absolute w-full top-full" x-show="expanded" x-collapse.duration.700ms x-cloak>
                     <div class="bg-neutral-grey-1 rounded-lg">
                         <?php foreach ($download_links as $link) :
-                            $link_target = $link['link']['target'] ? $link['link']['target'] : '_self'; ?>
-                            <a class="group py-4 px-5.5 flex items-center gap-1 rounded-lg hover:bg-neutral-white transition-colors duration-200" href="<?php echo esc_url($link['link']['url']) ?>" target="<?php echo esc_attr($link_target) ?>">
+
+                            $title = $link['title'];
+                            $download_url = match ($link['type']) {
+                                'link' => $link['link'],
+                                'file' => $link['file']['url']
+                            };
+                        ?>
+                            <a class="group py-4 px-5.5 flex items-center gap-1 rounded-lg hover:bg-neutral-white transition-colors duration-200" href="<?php echo esc_url($download_url) ?>" target="_blank" download>
                                 <div class="hidden bg-brand-primary w-1.5 h-1.5 rounded-full group-hover:inline-block"></div>
-                                <?php echo esc_html($link['link']['title']) ?>
+                                <?php echo esc_html($title) ?>
                             </a>
                         <?php endforeach ?>
                     </div>

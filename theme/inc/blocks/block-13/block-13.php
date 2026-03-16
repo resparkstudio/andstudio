@@ -37,9 +37,15 @@ andstudio_display_block_preview_img($block)
             <!-- Mobile slider -->
             <div data-swiper="block-13" class="mt-8 md:hidden">
                 <div class="swiper-wrapper">
-                    <?php foreach ($images as $image) : ?>
+                    <?php foreach ($images as $image) :
+                        $item_video_url = $image['video'] && $image['video_group'] ? ($image['video_group']['video_url'] ?: ($image['video_group']['video_file']['url'] ?? '')) : '';
+                    ?>
                         <div class="swiper-slide">
-                            <img class="object-cover w-full" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
+                            <?php if ($item_video_url) : ?>
+                                <div class="w-full aspect-video"><?php andstudio_background_video($item_video_url); ?></div>
+                            <?php else : ?>
+                                <img class="object-cover w-full" src="<?php echo esc_url($image['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($image['image']['alt'] ?? '') ?>">
+                            <?php endif ?>
                         </div>
                     <?php endforeach ?>
                 </div>
@@ -51,20 +57,37 @@ andstudio_display_block_preview_img($block)
                 <div class="h-screen -ml-32 pl-32 -mr-32 sticky top-0 flex overflow-hidden">
                     <div data-scroll-gallery="wrap" class="h-full flex shrink-0 gap-5 will-change-transform">
                         <!-- First image -->
-                        <img class="h-full shrink-0" src="<?php echo esc_url($first_image['url']) ?>" alt="<?php echo esc_attr($first_image['alt']) ?>">
+                        <?php $first_video_url = $first_image['video'] && $first_image['video_group'] ? ($first_image['video_group']['video_url'] ?: ($first_image['video_group']['video_file']['url'] ?? '')) : ''; ?>
+                        <?php if ($first_video_url) : ?>
+                            <div class="h-full shrink-0 aspect-video"><?php andstudio_background_video($first_video_url); ?></div>
+                        <?php else : ?>
+                            <img class="h-full shrink-0" src="<?php echo esc_url($first_image['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($first_image['image']['alt'] ?? '') ?>">
+                        <?php endif ?>
 
                         <!-- Smaller rows wrap -->
                         <div class="flex flex-col gap-5 shrink-0">
                             <!-- Top row -->
                             <div class="h-1/2 flex gap-5 shrink-0">
-                                <?php foreach ($top_row as $image) : ?>
-                                    <img class="h-full shrink-0" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
+                                <?php foreach ($top_row as $image) :
+                                    $item_video_url = $image['video'] && $image['video_group'] ? ($image['video_group']['video_url'] ?: ($image['video_group']['video_file']['url'] ?? '')) : '';
+                                ?>
+                                    <?php if ($item_video_url) : ?>
+                                        <div class="h-full shrink-0 aspect-video"><?php andstudio_background_video($item_video_url); ?></div>
+                                    <?php else : ?>
+                                        <img class="h-full shrink-0" src="<?php echo esc_url($image['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($image['image']['alt'] ?? '') ?>">
+                                    <?php endif ?>
                                 <?php endforeach ?>
                             </div>
                             <!-- Bottom row -->
                             <div class="h-1/2 flex gap-5 shrink-0">
-                                <?php foreach ($bottom_row as $image) : ?>
-                                    <img class="h-full shrink-0" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
+                                <?php foreach ($bottom_row as $image) :
+                                    $item_video_url = $image['video'] && $image['video_group'] ? ($image['video_group']['video_url'] ?: ($image['video_group']['video_file']['url'] ?? '')) : '';
+                                ?>
+                                    <?php if ($item_video_url) : ?>
+                                        <div class="h-full shrink-0 aspect-video"><?php andstudio_background_video($item_video_url); ?></div>
+                                    <?php else : ?>
+                                        <img class="h-full shrink-0" src="<?php echo esc_url($image['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($image['image']['alt'] ?? '') ?>">
+                                    <?php endif ?>
                                 <?php endforeach ?>
                             </div>
 

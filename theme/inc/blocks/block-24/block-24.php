@@ -34,8 +34,14 @@ andstudio_display_block_preview_img($block);
 
         <?php if ($images) : ?>
             <div class="flex flex-col mt-8 gap-2.5 md:mt-16 md:grid md:grid-cols-3 md:gap-5">
-                <?php foreach ($images as $image) : ?>
-                    <img class="w-full object-cover aspect-[353/436]" src="<?php echo esc_url($image['url']) ?>" alt="<?php echo esc_attr($image['alt']) ?>">
+                <?php foreach ($images as $image) :
+                    $item_video_url = $image['video'] && $image['video_group'] ? ($image['video_group']['video_url'] ?: ($image['video_group']['video_file']['url'] ?? '')) : '';
+                ?>
+                    <?php if ($item_video_url) : ?>
+                        <div class="relative w-full aspect-[353/436]"><?php andstudio_background_video($item_video_url); ?></div>
+                    <?php elseif ($image['image']) : ?>
+                        <img class="w-full object-cover aspect-[353/436]" src="<?php echo esc_url($image['image']['url'] ?? '') ?>" alt="<?php echo esc_attr($image['image']['alt'] ?? '') ?>">
+                    <?php endif ?>
                 <?php endforeach ?>
             </div>
         <?php endif ?>

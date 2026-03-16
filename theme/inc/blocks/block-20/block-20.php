@@ -28,7 +28,9 @@ andstudio_display_block_preview_img($block);
 
         <?php if ($items) : ?>
             <div class="flex flex-col gap-8 mt-8 md:mt-16 md:gap-10">
-                <?php foreach ($items as $item) : ?>
+                <?php foreach ($items as $item) :
+                    $item_video_url = $item['video'] && $item['video_group'] ? ($item['video_group']['video_url'] ?: ($item['video_group']['video_file']['url'] ?? '')) : '';
+                ?>
                     <?php if ($item['vertical_layout']) : ?>
                         <!-- Vertical Layout -->
                         <div class="pt-8 border-t border-neutral-grey-2 md:first:border-t-0 md:first:pt-0 md:pt-10 md:flex md:flex-col md:items-start md:gap-10 md:justify-between">
@@ -42,16 +44,20 @@ andstudio_display_block_preview_img($block);
                                     </div>
                                 <?php endif ?>
                             </div>
-                            <?php if ($item['image']) {
-                                echo wp_get_attachment_image($item['image']['id'], 'full', false, array(
-                                    'class' => 'w-full mt-8 hidden md:block md:w-full md:mt-0'
-                                ));
-                            } ?>
-                            <?php if ($item['mobile_image']) {
-                                echo wp_get_attachment_image($item['mobile_image']['id'], 'full', false, array(
-                                    'class' => 'w-full mt-8 md:hidden'
-                                ));
-                            } ?>
+                            <?php if ($item_video_url) : ?>
+                                <div class="relative w-full mt-8 md:mt-0 aspect-video"><?php andstudio_background_video($item_video_url); ?></div>
+                            <?php else : ?>
+                                <?php if ($item['image']) {
+                                    echo wp_get_attachment_image($item['image']['id'], 'full', false, array(
+                                        'class' => 'w-full mt-8 hidden md:block md:w-full md:mt-0'
+                                    ));
+                                } ?>
+                                <?php if ($item['mobile_image']) {
+                                    echo wp_get_attachment_image($item['mobile_image']['id'], 'full', false, array(
+                                        'class' => 'w-full mt-8 md:hidden'
+                                    ));
+                                } ?>
+                            <?php endif ?>
                         </div>
                     <?php else : ?>
                         <!-- Horizontal Layout -->
@@ -66,11 +72,13 @@ andstudio_display_block_preview_img($block);
                                     </div>
                                 <?php endif ?>
                             </div>
-                            <?php if ($item['image']) {
-                                echo wp_get_attachment_image($item['image']['id'], 'full', false, array(
+                            <?php if ($item_video_url) : ?>
+                                <div class="relative w-full mt-8 md:mt-0 md:w-7/12 aspect-video"><?php andstudio_background_video($item_video_url); ?></div>
+                            <?php elseif ($item['image']) : ?>
+                                <?php echo wp_get_attachment_image($item['image']['id'], 'full', false, array(
                                     'class' => 'w-full mt-8 md:mt-0 md:w-7/12'
-                                ));
-                            } ?>
+                                )); ?>
+                            <?php endif ?>
                         </div>
                     <?php endif ?>
                 <?php endforeach ?>

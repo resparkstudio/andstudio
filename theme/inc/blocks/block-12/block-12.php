@@ -45,11 +45,21 @@ andstudio_display_block_preview_img($block);
                     </div>
 
                     <div class="mt-8 flex flex-col gap-2.5 md:grid md:grid-cols-2 md:gap-10 md:mt-10">
-                        <?php foreach ($tab['images'] as $image) : ?>
-                            <?php echo wp_get_attachment_image($image['id'], 'full', false, array(
-                                'class' => 'object-cover w-full aspect-[572/369]',
-                            )); ?>
-                        <?php endforeach ?>
+                        <?php if (!empty($tab['images'])) : ?>
+                            <?php foreach ($tab['images'] as $image) :
+                                $item_video_url = $image['video'] && $image['video_group'] ? ($image['video_group']['video_url'] ?: ($image['video_group']['video_file']['url'] ?? '')) : '';
+                            ?>
+                                <div class="w-full aspect-[572/369]">
+                                    <?php if ($item_video_url) : ?>
+                                        <?php andstudio_background_video($item_video_url); ?>
+                                    <?php else : ?>
+                                        <?php echo wp_get_attachment_image($image['image']['id'], 'full', false, array(
+                                            'class' => 'w-full h-full object-cover',
+                                        )); ?>
+                                    <?php endif ?>
+                                </div>
+                            <?php endforeach ?>
+                        <?php endif ?>
                     </div>
                 </div>
             <?php endforeach ?>

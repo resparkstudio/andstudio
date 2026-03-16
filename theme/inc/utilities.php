@@ -231,3 +231,15 @@ function andstudio_get_parent_page_from_url() {
 
     return $brand_page;
 }
+
+
+/**
+ * Output background video
+ */
+function andstudio_background_video(string $url, string $class = ''): void {
+    echo "<div class='relative w-full h-full overflow-hidden {$class}'>
+        <video class='absolute inset-0 w-full h-full object-cover pointer-events-none' autoplay loop muted playsinline>
+            <source src='{$url}' type='video/mp4'>
+        </video>
+    </div>";
+}

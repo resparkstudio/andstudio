@@ -1,13 +1,26 @@
 <?php
-$is_full_width = get_field('full-width') ?? false;
-$is_logotype = get_field('logotype') ?? false;
-$logo_image = get_field('logo_image') ?? false;
-$image = get_field('image') ?? false;
-$title = get_field('title') ?? false;
-$description = get_field('description') ?? false;
-$download_title = get_field('download_title') ?? false;
-$download_link = get_field('download_link') ?? false;
-$download_contents = get_field('download_contents') ?? false;
+$enable_hero = get_field('enable_hero');
+$hero = get_field('hero_settings');
+
+$is_full_width = $hero['full-width'];
+$is_logotype = $hero['logotype'];
+$logo_image = $hero['logo_image'];
+$image = $hero['image'];
+$title = $hero['title'];
+$description = $hero['description'];
+
+$download = $hero['download_block'];
+$download_title = $download['download_title'];
+$download_type = $download['download_type'];
+$download_button_text = $download['download_button_text'];
+$download_contents = $download['download_contents'];
+
+$download_url = $download['download_link'] ?: $download['download_file'];
+$download_link = $download_url ? [
+    'url' => $download_url,
+    'title' => $download_button_text ?: 'Download',
+    'target' => '_blank',
+] : null;
 
 $banner_width_class = $is_full_width ? 'md:w-full' : '';
 ?>
@@ -57,8 +70,8 @@ $banner_width_class = $is_full_width ? 'md:w-full' : '';
                             <?php endif ?>
                         </div>
 
-                        <a class="text-body-s text-neutral-white mt-4 pt-3 flex items-center justify-between border-t border-neutral-white md:mt-6" target="<?php echo esc_attr($download_link['target'] ? $download_link['target'] : '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
-                            <?php echo esc_htmL($download_link['title']) ?>
+                        <a download class="text-body-s text-neutral-white mt-4 pt-3 flex items-center justify-between border-t border-neutral-white md:mt-6" target="<?php echo esc_attr($download_link['target'] ?: '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
+                            <?php echo esc_html($download_link['title']) ?>
                             <svg class="w-8 h-8 text-neutral-white" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.9997 5.3335V20.0002M15.9997 20.0002L9.33301 13.3335M15.9997 20.0002L22.6663 13.3335" stroke="currentColor" />
                                 <path d="M6.66699 24H25.3337" stroke="currentColor" />
@@ -68,7 +81,7 @@ $banner_width_class = $is_full_width ? 'md:w-full' : '';
                 <?php endif ?>
 
                 <?php if ($download_link && $is_logotype) : ?>
-                    <a class="bg-brand-primary text-body-s text-text-primary flex justify-between items-center rounded-lg mt-8 w-full p-5 md:hidden" target="<?php echo esc_attr($download_link['target'] ? $download_link['target'] : '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
+                    <a download class="bg-brand-primary text-body-s text-text-primary flex justify-between items-center rounded-lg mt-8 w-full p-5 md:hidden" target="<?php echo esc_attr($download_link['target'] ?: '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
                         <?php echo esc_html($download_link['title']) ?>
                         <svg class="w-8 h-8 text-neutral-white" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.9997 5.3335V20.0002M15.9997 20.0002L9.33301 13.3335M15.9997 20.0002L22.6663 13.3335" stroke="currentColor" />
@@ -80,7 +93,7 @@ $banner_width_class = $is_full_width ? 'md:w-full' : '';
 
             <!-- Desktop logo block -->
             <?php if ($download_link && $is_logotype) : ?>
-                <div class="hidden md:flex md:flex-col md:gap-5 md:max-w-92.5">
+                <div class="hidden md:flex md:flex-col md:gap-5 md:w-full md:max-w-100">
                     <?php if ($logo_image) : ?>
                         <?php echo wp_get_attachment_image($logo_image['id'], 'full', false, array(
                             'class' => 'object-cover w-full rounded-xl',
@@ -88,7 +101,7 @@ $banner_width_class = $is_full_width ? 'md:w-full' : '';
                     <?php endif ?>
 
                     <?php if ($download_link) : ?>
-                        <a class="bg-brand-primary text-body-s text-text-primary flex justify-between items-center rounded-xl w-full p-5 grow md:hover:bg-brand-secondary md:hover:text-text-secondary transition-colors duration-200" target="<?php echo esc_attr($download_link['target'] ? $download_link['target'] : '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
+                        <a download class="bg-brand-primary text-body-s text-text-primary flex justify-between items-center rounded-xl w-full p-5 grow md:hover:bg-brand-secondary md:hover:text-text-secondary transition-colors duration-200" target="<?php echo esc_attr($download_link['target'] ?: '_self') ?>" href="<?php echo esc_url($download_link['url']) ?>">
                             <?php echo esc_html($download_link['title']) ?>
                             <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.9997 5.3335V20.0002M15.9997 20.0002L9.33301 13.3335M15.9997 20.0002L22.6663 13.3335" stroke="currentColor" />

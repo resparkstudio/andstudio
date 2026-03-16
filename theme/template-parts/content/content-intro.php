@@ -45,7 +45,7 @@ $image_classes_config = [
     <div class="absolute inset-0 z-10">
         <?php foreach ($images as $index => $image) :
             // General classes
-            $classes = 'absolute object-cover';
+            $classes = 'absolute';
 
             // plane value for floatingImagesEffect() animation
             $floating_plane_index = $index % 2 ? 1 : 2;
@@ -57,9 +57,15 @@ $image_classes_config = [
 
             // Get remaining classes from the config array
             $classes .= ' ' . $image_classes_config[count($images)][$index] . '';
+
+            $item_video_url = $image['video'] && $image['video_group'] ? ($image['video_group']['video_url'] ?: ($image['video_group']['video_file']['url'] ?? '')) : '';
         ?>
 
-            <img class="<?php echo esc_attr($classes) ?>" src="<?php echo esc_url($image['url']) ?>" alt="" data-intro-image data-floating-plane="<?php echo esc_attr($floating_plane_index) ?>">
+            <?php if ($item_video_url) : ?>
+                <div class="<?php echo esc_attr($classes) ?> overflow-hidden" data-intro-image data-floating-plane="<?php echo esc_attr($floating_plane_index) ?>"><?php andstudio_background_video($item_video_url); ?></div>
+            <?php elseif ($image['image']) : ?>
+                <img class="<?php echo esc_attr($classes) ?> object-cover" src="<?php echo esc_url($image['image']['url'] ?? '') ?>" alt="" data-intro-image data-floating-plane="<?php echo esc_attr($floating_plane_index) ?>">
+            <?php endif ?>
         <?php endforeach ?>
     </div>
 

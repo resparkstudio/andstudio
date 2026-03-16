@@ -16,7 +16,7 @@
 }
 
 .wp-block-post-title {
-	@apply text-h2 m-4 rounded-md border border-[#CCC] p-5 transition-all;
+	@apply text-h3 m-4 rounded-md border border-[#CCC] p-5 transition-all;
 
 	&:hover {
 		@apply border-[#007CBA];

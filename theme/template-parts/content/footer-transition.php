@@ -1,6 +1,6 @@
 <?php
-$subtitle = get_field('subtitle');
-$title = get_field('title');
+$subtitle = get_field('footer_subtitle');
+$title = get_field('footer_title');
 $next_page = get_field('next_page_link');
 
 $title = str_replace('|m|', '<br class="md:hidden">', $title);

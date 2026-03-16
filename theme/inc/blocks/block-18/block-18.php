@@ -5,8 +5,11 @@ $title = get_field('title');
 $description = get_field('description');
 $link = get_field('link');
 $button = get_field('button');
-$image = get_field('image');
-$mobile_image = get_field('mobile_image');
+$video = get_field('video');
+$video_group = get_field('video_group');
+$image_group = get_field('image_group');
+
+$video_url = $video && $video_group ? ($video_group['video_url'] ?: ($video_group['video_file']['url'] ?? '')) : '';
 
 andstudio_display_block_preview_img($block);
 ?>
@@ -37,16 +40,20 @@ andstudio_display_block_preview_img($block);
             </div>
         <?php endif ?>
 
-        <?php if ($image) {
-            echo wp_get_attachment_image($image['id'], 'full', false, array(
-                'class' => 'hidden md:block md:w-full md:mt-16'
-            ));
-        } ?>
+        <?php if ($video_url) : ?>
+            <div class="relative w-full mt-8 md:mt-16 aspect-video"><?php andstudio_background_video($video_url); ?></div>
+        <?php else : ?>
+            <?php if ($image_group && $image_group['desktop_image']) {
+                echo wp_get_attachment_image($image_group['desktop_image']['id'], 'full', false, array(
+                    'class' => 'hidden md:block md:w-full md:mt-16'
+                ));
+            } ?>
 
-        <?php if ($mobile_image) {
-            echo wp_get_attachment_image($mobile_image['id'], 'full', false, array(
-                'class' => 'w-full mt-8 md:hidden'
-            ));
-        } ?>
+            <?php if ($image_group && $image_group['mobile_image']) {
+                echo wp_get_attachment_image($image_group['mobile_image']['id'], 'full', false, array(
+                    'class' => 'w-full mt-8 md:hidden'
+                ));
+            } ?>
+        <?php endif ?>
     </div>
 </section>
