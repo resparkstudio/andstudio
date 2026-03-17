@@ -25,14 +25,14 @@ $download_link = $download_url ? [
 $banner_width_class = $is_full_width ? 'md:w-full' : '';
 ?>
 <?php if ($image) : ?>
-    <div class="hero-block_image w-full aspect-[393/264] md:sticky md:top-0 md:aspect-[1440/720] md:w-full md:h-full md:overflow-hidden">
+    <div class="hero-block_image min-h-[80vh] w-full aspect-[393/264] md:sticky md:top-0 md:aspect-[1440/720] md:w-full md:h-full md:overflow-hidden">
         <?php echo wp_get_attachment_image($image['id'], 'full', false, array(
             'class' => 'object-cover w-full h-full will-change-transform',
             'data-hero-reveal' => 'image'
         )); ?>
     </div>
 <?php endif ?>
-<section data-hero-scroll="hero-section" class="bg-neutral-grey-1 pb-12 md:overflow-hidden md:absolute md:top-0 md:aspect-[1440/720] md:w-full md:pb-0 md:bg-transparent">
+<section data-hero-scroll="hero-section" class="min-h-[80vh] bg-neutral-grey-1 pb-12 md:overflow-hidden md:absolute md:top-0 md:aspect-[1440/720] md:w-full md:pb-0 md:bg-transparent">
 
     <div class="container-lg -mt-32 relative z-10 md:pb-12 md:mt-0 md:h-full md:flex md:flex-col md:justify-end overflow-hidden md:items-start">
         <div data-hero-reveal="banner" class="flex gap-5 w-full will-change-transform">

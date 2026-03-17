@@ -454,6 +454,11 @@
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
+            },
+            {
+                "param": "page_type",
+                "operator": "!=",
+                "value": "top_level"
             }
         ]
     ],
@@ -467,5 +472,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773663373
+    "modified": 1773739007
 }

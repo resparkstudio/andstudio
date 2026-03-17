@@ -10,7 +10,7 @@
 
 ?>
 
-<article data-scroll-transition="content" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article class="relative" data-scroll-transition="content" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<?php if (get_field('enable_hero')) : ?>
 		<?php get_template_part('template-parts/content/hero') ?>
