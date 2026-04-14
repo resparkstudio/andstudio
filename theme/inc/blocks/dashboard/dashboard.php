@@ -80,11 +80,14 @@ $sub_brands = get_field('sub_brands');
                         <?php if ($page['download_links']) : ?>
                             <div class="hidden md:z-20 md:absolute md:left-6 md:bottom-6 md:flex md:gap-2 md:opacity-0 md:group-hover:opacity-100 md:transition-opacity duration-100">
                                 <?php foreach ($page['download_links'] as $link) :
-                                    $link_target = $link['link']['target'] ? $link['link']['target'] : '_self'; ?>
+                                    $link_data = $link['link'];
+                                    $link_url = is_array($link_data) ? $link_data['url'] : $link_data;
+                                    $link_title = is_array($link_data) ? $link_data['title'] : '';
+                                    $link_target = is_array($link_data) ? ($link_data['target'] ?: '_self') : '_self'; ?>
                                     <a class="text-body-s text-neutral-white flex gap-1 px-4 py-1.5 items-center rounded-lg hover:bg-neutral-grey-1 hover:text-neutral-black transition-colors duration-200"
-                                        href="<?php echo esc_url($link['link']['url']) ?>"
+                                        href="<?php echo esc_url($link_url) ?>"
                                         target="<?php echo esc_attr($link_target) ?>">
-                                        <?php echo esc_html($link['link']['title']) ?>
+                                        <?php echo esc_html($link_title) ?>
                                         <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M8.00033 2.66602V9.99935M8.00033 9.99935L4.66699 6.66602M8.00033 9.99935L11.3337 6.66602" stroke="currentColor" />
                                             <path d="M3.33301 12H12.6663" stroke="currentColor" />
